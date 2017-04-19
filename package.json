@@ -1,0 +1,20 @@
+{
+  "name": "restful-starter",
+  "version": "1.0.0",
+  "description": "kit starter node application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "Sequelize",
+    "Typescript",
+    "Tslint",
+    "JWT",
+    "E2015"
+  ],
+  "author": "Hector Riquelme",
+  "license": "ISC"
+}
