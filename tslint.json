@@ -27,7 +27,10 @@
         "whitespace": [
             true, "check-branch", "check-operator", "check-typecast"
         ],
-        "no-var-keyword": true
+        "no-var-keyword": true,
+        "no-namespace": false,
+        "no-unused-expression": true,
+        "object-literal-sort-keys": false
     },
     "rulesDirectory": []
 }

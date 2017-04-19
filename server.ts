@@ -2,18 +2,20 @@ import * as bodyParser from 'body-parser'
 import * as cors from 'cors'
 import * as express from 'express'
 import * as http from 'http'
-
+import { Routes } from './app/Router'
 
 class AppServer {
 
     public app: express.Application
     public routes: express.Router
 
+
     constructor() {
         this.app = express()
         this.expressConfig()
         this.routerConfig()
     }
+
 
     private expressConfig(): void {
         this.app.use(bodyParser.urlencoded({extended: true}))
@@ -34,13 +36,16 @@ class AppServer {
         })
     }
 
+
     private routerConfig(): void {
-        this.routes = express.Router()
+        const r = new Routes()
+        r.routes.forEach((row) => {
+            this.app.use(row.path, row.handler)
+        })
     }
 
 
 }
-
 
 const appServer = new AppServer()
 const app = appServer.app
