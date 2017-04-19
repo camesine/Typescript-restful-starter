@@ -4,6 +4,7 @@
   "description": "kit starter node application",
   "main": "server.js",
   "scripts": {
+    "start": "ts-node server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -16,5 +17,11 @@
     "E2015"
   ],
   "author": "Hector Riquelme",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^7.0.13",
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.3",
+    "express": "^4.15.2"
+  }
 }
