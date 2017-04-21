@@ -9,13 +9,11 @@ class AppServer {
     public app: express.Application
     public routes: express.Router
 
-
     constructor() {
         this.app = express()
         this.expressConfig()
         this.routerConfig()
     }
-
 
     private expressConfig(): void {
         this.app.use(bodyParser.urlencoded({extended: true}))
@@ -30,25 +28,57 @@ class AppServer {
         this.app.use(cors())
 
         this.app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction): void => {
-            const error = new Error("Not Founded")
+            const error = new Error("Not found")
             err.status = 404
             next(err)
         })
     }
 
-
     private routerConfig(): void {
         const r = new Routes()
         r.routes.forEach((row) => {
-            this.app.use(row.path, row.handler)
+            this.app.use(row.path, row.middleware, row.handler)
         })
     }
 
-
 }
 
+const port: number = process.env.PORT || 3000
 const appServer = new AppServer()
 const app = appServer.app
 const server = http.createServer(app)
 
-server.listen(8000, () => console.log("LISTENING PORT 8000"))
+server.listen(port)
+server.on("error", onError)
+server.on("listening", onListening)
+
+function onListening() {
+    const addr = server.address()
+    const bind = typeof addr === "string"
+        ? "pipe " + addr
+        : "port " + addr.port
+    console.log("Listening on " + bind)
+}
+
+function onError(error: any) {
+    if (error.syscall !== "listen") {
+        throw error
+    }
+
+    const bind = typeof port === "string"
+        ? "Pipe " + port
+        : "Port " + port
+
+    switch (error.code) {
+        case "EACCES":
+            console.error(bind + " requires elevated privileges")
+            process.exit(1)
+            break
+        case "EADDRINUSE":
+            console.error(bind + " is already in use")
+            process.exit(1)
+            break
+        default:
+            throw error
+    }
+}
