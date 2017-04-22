@@ -31,7 +31,8 @@
         "no-namespace": false,
         "no-unused-expression": true,
         "object-literal-sort-keys": false,
-        "ban-types": [false, ["Function"]]
+        "ban-types": [false, ["Function"]],
+        "curly": false
     },
     "rulesDirectory": []
 }
