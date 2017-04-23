@@ -1,4 +1,6 @@
 import * as express from 'express'
+import * as jwt from 'express-jwt'
+import { config } from '../config/config'
 import { AnyMiddleware } from './middlewares/AnyMiddleware'
 import { AnyRoute } from './routes/anyRoute'
 import { JWTRoute } from './routes/jwtRoute'
@@ -32,6 +34,11 @@ export class Routes {
             path: "/JWT",
             middleware: [],
             handler: this.JWTRoute.router,
+        },
+        {
+            path: "/",
+            middleware: jwt({secret: config.secret}),
+            handler: this.anyRoute.router,
         }]
     }
 
