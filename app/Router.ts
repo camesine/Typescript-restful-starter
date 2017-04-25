@@ -1,4 +1,6 @@
 import * as express from 'express'
+import * as jwt from 'express-jwt'
+import { config } from '../config/config'
 import { AnyMiddleware } from './middlewares/AnyMiddleware'
 import { AnyRoute } from './routes/anyRoute'
 import { JWTRoute } from './routes/jwtRoute'
@@ -25,13 +27,18 @@ export class Routes {
 
     private loadRoutes(): void {
         this.routes = [{
-            path: "/any",
+            path: "/",
             middleware: [this.anyMiddleware.anyCheck, this.anyMiddleware.anyCheckTwo],
             handler: this.anyRoute.router,
         },{
             path: "/JWT",
             middleware: [],
             handler: this.JWTRoute.router,
+        },
+        {
+            path: "/any",
+            middleware: jwt({secret: config.secret}),
+            handler: this.anyRoute.router,
         }]
     }
 

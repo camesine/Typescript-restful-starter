@@ -13,8 +13,10 @@ export class AnyRoute {
     }
 
     private loadActions() {
-        this.router.get('/index', this.Controller.index)
-        this.router.get('/home', this.Controller.home)
+        this.router.get('/', this.Controller.index)
+        this.router.post('/', this.Controller.create)
+        this.router.put('/', this.Controller.update)
+        this.router.delete('/', this.Controller.delete)
     }
 
 }
