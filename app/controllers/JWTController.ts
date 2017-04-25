@@ -1,10 +1,16 @@
 import * as express from 'express'
-import { Service } from '../services/JWTService'
+import { JWTService } from '../services/JWTService'
 
 export class JWTController {
 
-    public async index(req: express.Request, res: express.Response): Promise<any> {
-        const token = await Service.signToken({name: "hector", rol: "1"})
+    public Service: JWTService
+
+    constructor() {
+        this.Service = new JWTService()
+    }
+
+    public index = async (req: express.Request, res: express.Response) => {
+        const token = await this.Service.signToken({name: "hector", rol: "1"})
         res.send(token)
     }
 

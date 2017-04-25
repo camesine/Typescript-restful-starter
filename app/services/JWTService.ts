@@ -2,11 +2,11 @@ import * as JWT from 'jsonwebtoken'
 import * as bearer from 'token-extractor'
 import { config } from '../../config/config'
 
-class JWTService {
+export class JWTService {
 
     public signToken(params: {name: string, rol: string}, options?: string): Promise<string> {
         return new Promise((resolve, reject) => {
-            JWT.sign(params, config.secret, options || null, (err, token) => {
+            JWT.sign(params, config.SECRET, options || null, (err, token) => {
                 if (err)  reject(err)
                 resolve(token)
             })
@@ -15,7 +15,7 @@ class JWTService {
 
     public verifyToken(token: string, options: string): Promise<string> {
         return new Promise((resolve, reject) => {
-           JWT.verify(token, config.secret, (err, decoded) => {
+           JWT.verify(token, config.SECRET, (err, decoded) => {
                 if (err) reject(err)
                 resolve(decoded)
             })
@@ -32,5 +32,3 @@ class JWTService {
     }
 
 }
-
-export const Service = new JWTService()

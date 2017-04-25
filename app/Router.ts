@@ -27,7 +27,7 @@ export class Routes {
 
     private loadRoutes(): void {
         this.routes = [{
-            path: "/any",
+            path: "/",
             middleware: [this.anyMiddleware.anyCheck, this.anyMiddleware.anyCheckTwo],
             handler: this.anyRoute.router,
         },{
@@ -36,7 +36,7 @@ export class Routes {
             handler: this.JWTRoute.router,
         },
         {
-            path: "/",
+            path: "/any",
             middleware: jwt({secret: config.secret}),
             handler: this.anyRoute.router,
         }]
