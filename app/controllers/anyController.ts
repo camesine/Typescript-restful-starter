@@ -1,9 +1,11 @@
 import * as express from 'express'
+import { User } from '../db/model/User'
 
 export class AnyController {
 
     public index = async (req: express.Request, res: express.Response) => {
-        res.send({route: "ANY INDEX"})
+        const data = await User.findAll()
+        res.send(data)
     }
 
     public create = async (req: express.Request, res: express.Response) => {

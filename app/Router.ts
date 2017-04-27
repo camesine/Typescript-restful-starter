@@ -37,7 +37,7 @@ export class Routes {
         },
         {
             path: "/any",
-            middleware: jwt({secret: config.secret}),
+            middleware: jwt({secret: config.SECRET}),
             handler: this.anyRoute.router,
         }]
     }
