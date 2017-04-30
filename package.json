@@ -9,11 +9,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "Node",
-    "Express",
-    "Sequelize",
-    "Typescript",
-    "Tslint",
+    "node",
+    "express",
+    "sequelize",
+    "typescript",
+    "tslint",
     "JWT",
     "E2015"
   ],
@@ -30,6 +30,7 @@
     "express": "^4.15.2",
     "express-jwt": "^5.3.0",
     "jsonwebtoken": "^7.3.0",
+    "mysql": "^2.13.0",
     "os": "^0.1.1",
     "path": "^0.12.7",
     "sequelize": "^3.30.4",

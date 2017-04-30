@@ -1,4 +1,4 @@
-import { IUserAttribute, IUserModel, User } from '../db/model/User'
+import { IUserAttribute, IUserInstance ,IUserModel, User } from '../db/model/User'
 
 export class UserService {
 
@@ -14,6 +14,10 @@ export class UserService {
 
     public list = () => {
        return this.User.findAll()
+    }
+
+    public find = (id: number) => {
+       return this.User.findById(id)
     }
 
     public update = (user: IUserAttribute) => {
