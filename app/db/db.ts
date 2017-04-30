@@ -7,9 +7,7 @@ const USER = config.DATABASE.USER || 'root'
 const PASSWORD = config.DATABASE.PASSWORD || ''
 const DIALECT = config.DATABASE.DIALECT || 'mariadb'
 
-const dbConfig = new Sequelize(SERVER, USER, PASSWORD,{
+export const db = new Sequelize(DATABASE, USER, PASSWORD,{
         host: SERVER,
         dialect: DIALECT,
     })
-
-export const db = dbConfig.Sequelize
