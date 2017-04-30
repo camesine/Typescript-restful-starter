@@ -1,27 +1,23 @@
 import * as Sequelize from 'sequelize'
 import { db } from '../db'
 
-export interface IUserAttr {
-    id?: number
-    FullName?: string
+export interface IUserAttribute {
+   id?: number,
+   name?: string[2]
 }
 
-export interface IUserInstance extends Sequelize.Instance<IUserAttr> {
-    id?: number
-    FullName?: string
-}
+export interface IUserInstance extends Sequelize.Instance<IUserAttribute>, IUserAttribute {}
+export interface IUserModel extends Sequelize.Model<IUserInstance, IUserAttribute> {}
 
-export const User = db.define<IUserInstance, IUserAttr>('User', {
+export const User = db.define<IUserInstance, IUserAttribute>('User', {
     id: {
         type: db.Sequelize.INTEGER,
-        autoIncrement: true,
         primaryKey: true,
     },
-    FullName: {
-        type: Sequelize.STRING },
-    }, {
+    name: {
+        type: db.Sequelize.STRING,
+    },
+}, {
         tableName: 'User',
         timestamps: false,
-    },
-)
-
+    })
