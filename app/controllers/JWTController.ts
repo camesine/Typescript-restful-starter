@@ -10,7 +10,8 @@ export class JWTController {
     }
 
     public index = async (req: express.Request, res: express.Response) => {
-        const token = await this.Service.signToken({name: "hector", rol: "1"})
+        const payload = req.body.payload
+        const token = await this.Service.signToken(payload)
         res.send(token)
     }
 

@@ -1,9 +1,9 @@
 import * as express from 'express'
 import * as jwt from 'express-jwt'
 import { config } from '../config/config'
-import { AnyMiddleware } from './middlewares/AnyMiddleware'
-import { AnyRoute } from './routes/anyRoute'
-import { JWTRoute } from './routes/jwtRoute'
+import { SampleMiddleware } from './middlewares/SampleMiddleware'
+import { JWTRoute } from './routes/JWTRoute'
+import { SampleRoute } from './routes/SampleRoute'
 
 interface IRoute {
     path: string,
@@ -14,31 +14,31 @@ interface IRoute {
 export class Routes {
 
     public routes: IRoute[]
-    public anyRoute: AnyRoute
+    public SampleRoute: SampleRoute
     public JWTRoute: JWTRoute
-    public anyMiddleware: AnyMiddleware
+    public SampleMiddleware: SampleMiddleware
 
     constructor() {
-        this.anyRoute = new AnyRoute()
+        this.SampleRoute = new SampleRoute()
         this.JWTRoute = new JWTRoute()
-        this.anyMiddleware = new AnyMiddleware()
+        this.SampleMiddleware = new SampleMiddleware()
         this.loadRoutes()
     }
 
     private loadRoutes(): void {
         this.routes = [{
             path: "/",
-            middleware: [this.anyMiddleware.anyCheck, this.anyMiddleware.anyCheckTwo],
-            handler: this.anyRoute.router,
+            middleware: [this.SampleMiddleware.anyCheck, this.SampleMiddleware.anyCheckTwo],
+            handler: this.SampleRoute.router,
         },{
             path: "/JWT",
             middleware: [],
             handler: this.JWTRoute.router,
         },
         {
-            path: "/any",
-            middleware: [jwt({secret: config.SECRET}),this.anyMiddleware.anyCheck, this.anyMiddleware.anyCheckTwo],
-            handler: this.anyRoute.router,
+            path: "/sample",
+            middleware: jwt({secret: config.SECRET}),
+            handler: this.SampleRoute.router,
         }]
     }
 

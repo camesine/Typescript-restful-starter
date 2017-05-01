@@ -3,6 +3,7 @@ import * as cluster from 'cluster'
 import * as cors from 'cors'
 import * as express from 'express'
 import * as http from 'http'
+import * as methodOverride from 'method-override'
 import { cpus } from 'os'
 import { Routes } from './app/Router'
 
@@ -20,6 +21,7 @@ class AppServer {
     private expressConfig(): void {
         this.app.use(bodyParser.urlencoded({extended: true}))
         this.app.use(bodyParser.json({ limit: '50mb'} ))
+        this.app.use(methodOverride())
 
         this.app.use((req, res, next): void => {
             res.header('Access-Control-Allow-Origin', '*')
@@ -42,10 +44,34 @@ class AppServer {
         r.routes.forEach((row) => {
             this.app.use(row.path, row.middleware, row.handler)
         })
+
+        this.app.use((req: express.Request, res: express.Response, next: express.NextFunction): void => {
+            res.status(404)
+            res.json({
+                error: 'Not found',
+            })
+            next()
+        })
+
+        this.app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction): void  => {
+            if (err.name === 'UnauthorizedError') {
+                res.status(401).json({
+                    error: 'Please send a valid Token...',
+                })
+            }
+            next()
+        })
+
+        this.app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction): void => {
+            res.status(err.status || 500)
+            res.json({
+                error: err.message,
+            })
+            next()
+        })
     }
 
 }
-
 
 if (cluster.isMaster) {
 

@@ -1,14 +1,14 @@
 import * as express from 'express'
-import { AnyController } from '../controllers/anyController'
+import { SampleController } from '../controllers/SampleController'
 
-export class AnyRoute {
+export class SampleRoute {
 
     public router: express.Router
-    private Controller: AnyController
+    private Controller: SampleController
 
     constructor() {
         this.router = express.Router()
-        this.Controller = new AnyController()
+        this.Controller = new SampleController()
         this.loadActions()
     }
 
