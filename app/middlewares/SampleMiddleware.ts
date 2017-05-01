@@ -1,6 +1,6 @@
 import * as express from 'express'
 
-export class AnyMiddleware {
+export class SampleMiddleware {
 
     public anyCheck(req: express.Request, res: express.Response, next: express.NextFunction): void {
 

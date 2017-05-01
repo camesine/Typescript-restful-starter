@@ -13,7 +13,7 @@ export class JWTRoute {
     }
 
     private loadActions() {
-        this.router.get('/index', this.Controller.index)
+        this.router.post('/', this.Controller.index)
     }
 
 }

@@ -4,7 +4,7 @@ import { config } from '../../config/config'
 
 export class JWTService {
 
-    public signToken(params: {name: string, rol: string}, options?: string): Promise<string> {
+    public signToken(params: {name: string, role: string}, options?: string): Promise<string> {
         return new Promise((resolve, reject) => {
             JWT.sign(params, config.SECRET, options || null, (err, token) => {
                 if (err)  reject(err)
