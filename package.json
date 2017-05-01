@@ -1,6 +1,6 @@
 {
   "name": "restful-starter",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "kit starter node application",
   "main": "server.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "E2015"
   ],
   "author": "Hector Riquelme",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@types/express": "^4.0.35",
     "@types/jsonwebtoken": "^7.2.0",
