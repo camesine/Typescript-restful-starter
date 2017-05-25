@@ -1,4 +1,4 @@
-import { Sample } from '../app/db/models/Sample'
+import { Sample } from '../app/models/Sample'
 
 
 Sample.sync().then(() => {

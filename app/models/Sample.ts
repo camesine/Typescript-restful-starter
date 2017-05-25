@@ -1,5 +1,5 @@
 import * as Sequelize from 'sequelize'
-import { db } from '../db'
+import { db } from '../../config/db/db'
 
 export interface ISampleAttribute {
    id?: number,

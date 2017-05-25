@@ -1,4 +1,4 @@
-import { ISampleAttribute, ISampleInstance, ISampleModel, Sample } from '../db/models/Sample'
+import { ISampleAttribute, ISampleInstance, ISampleModel, Sample } from '../models/Sample'
 
 export class SampleService {
 

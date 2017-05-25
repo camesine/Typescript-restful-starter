@@ -1,6 +1,6 @@
 import * as JWT from 'jsonwebtoken'
 import * as bearer from 'token-extractor'
-import { config } from '../../config/config'
+import { config } from '../../config'
 
 export class JWTService {
 
