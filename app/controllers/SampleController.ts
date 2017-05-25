@@ -1,5 +1,5 @@
 import * as express from 'express'
-import { ISampleAttribute } from '../db/models/Sample'
+import { ISampleAttribute } from '../models/Sample'
 import { SampleService } from '../services/SampleService'
 
 export class SampleController {

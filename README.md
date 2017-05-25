@@ -1,5 +1,5 @@
 # Typescript-restful-starter
-node + ExpressJS + SequelizeJS + Typescript + JWT + ES2015 + Clustering + Tslint
+Node.js + ExpressJS + SequelizeJS + Typescript + JWT + ES2015 + Clustering + Tslint
 ------------
 # What use this Starter App?
 - **JWT** for protect routes.
@@ -13,15 +13,16 @@ node + ExpressJS + SequelizeJS + Typescript + JWT + ES2015 + Clustering + Tslint
 	/middlewares (Middlewares for the routes of the app)
 	/routes (Routes for Controllers of the app)
 	/service (Services for using in any Controller)
-	/db (DB configuration for use)
+	/models (Models configuration for use)
 	Router.ts (Config file for Routing)
 /config
-	config.ts (Config file for the app)
+	/db (DB configuration for use)
 /tasks
 	migrate.ts (Script file for create the table for the test case)
-server.ts (Main file to start the app)
+config.ts (Config file for the app)
 tsconfig.json (File configuration typescript)
 tslint.json (File configuration rules typescript)
+server.ts (Main file to start the app)
 ```
 # Install
 1. First clone this repository.

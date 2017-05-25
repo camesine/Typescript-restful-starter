@@ -1,6 +1,6 @@
 import * as express from 'express'
 import * as jwt from 'express-jwt'
-import { config } from '../config/config'
+import { config } from '../config'
 import { SampleMiddleware } from './middlewares/SampleMiddleware'
 import { JWTRoute } from './routes/JWTRoute'
 import { SampleRoute } from './routes/SampleRoute'

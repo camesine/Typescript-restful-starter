@@ -4,7 +4,7 @@
   "description": "kit starter node application",
   "main": "server.js",
   "scripts": {
-    "start": "ts-node server.ts",
+    "start": "./node_modules/.bin/ts-node server.ts",
     "dev": "nodemon --watch '**/*.ts' --exec 'ts-node' server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -36,6 +36,8 @@
     "os": "^0.1.1",
     "path": "^0.12.7",
     "sequelize": "^3.30.4",
-    "token-extractor": "^0.1.6"
+    "token-extractor": "^0.1.6",
+    "ts-node": "^3.0.4",
+    "typescript": "^2.3.3"
   }
 }
