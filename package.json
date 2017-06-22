@@ -6,7 +6,7 @@
   "scripts": {
     "start": "./node_modules/.bin/ts-node server.ts",
     "dev": "nodemon --watch '**/*.ts' --exec 'ts-node' server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/_mocha ./node_modules/.bin/_ts-node test/TestRouter.ts"
   },
   "keywords": [
     "node",
@@ -35,9 +35,17 @@
     "mysql": "^2.13.0",
     "os": "^0.1.1",
     "path": "^0.12.7",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
     "sequelize": "^3.30.4",
     "token-extractor": "^0.1.6",
     "ts-node": "^3.0.4",
     "typescript": "^2.3.3"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.0",
+    "@types/mocha": "^2.2.41",
+    "chai": "^4.0.2",
+    "mocha": "^3.4.2"
   }
 }
