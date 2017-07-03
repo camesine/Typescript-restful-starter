@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "./node_modules/.bin/ts-node server.ts",
-    "dev": "nodemon --watch '**/*.ts' --exec 'ts-node' server.ts",
+    "dev": "./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' server.ts",
     "test": "./node_modules/.bin/_mocha ./node_modules/.bin/_ts-node test/TestRouter.ts"
   },
   "keywords": [
@@ -35,17 +35,18 @@
     "mysql": "^2.13.0",
     "os": "^0.1.1",
     "path": "^0.12.7",
-    "request": "^2.81.0",
-    "request-promise": "^4.2.1",
     "sequelize": "^3.30.4",
+    "superagent": "^3.5.2",
     "token-extractor": "^0.1.6",
     "ts-node": "^3.0.4",
     "typescript": "^2.3.3"
   },
   "devDependencies": {
-    "@types/chai": "^4.0.0",
+    "@types/chai": "^4.0.1",
     "@types/mocha": "^2.2.41",
+    "@types/superagent": "^3.5.1",
     "chai": "^4.0.2",
-    "mocha": "^3.4.2"
+    "mocha": "^3.4.2",
+    "nodemon": "^1.11.0"
   }
 }
