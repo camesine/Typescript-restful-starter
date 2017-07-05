@@ -97,5 +97,49 @@ describe('ALL ', () => {
         })
     })
 
-   
+    it('SAMPLE CONTROLLER GET NOT FIND ONE', (done) => {
+        request.get(`${URI}/XXXX`)
+        .set('Authorization', `bearer ${token}`).set('Accept', 'application/json')
+        .end((err, res) => {
+            chai.expect(res.status).to.eq(404)
+            chai.expect(res.body).to.have.all.keys('text')
+            chai.expect(res.body.text).to.be.a('string')
+            chai.expect(res.body.text).to.equal('NOT FOUND')
+            done()
+        })
+    })
+ 
+    it('SAMPLE CONTROLLER ERROR POST CREATE', (done) => {
+        request.post(URI).set('Authorization', `bearer ${token}`).set('Accept', 'application/json')
+        .send({ sample: 'XXXX' })
+        .end((err, res) => {
+            chai.expect(res.status).to.eq(404)
+            chai.expect(res.body).to.have.all.keys('text')
+            chai.expect(res.body.text).to.be.a('string')
+            chai.expect(res.body.text).to.equal('ERROR')
+            done()
+        })
+    })
+
+    it('SAMPLE CONTROLLER ERROR PUT UPDATE', (done) => {
+        request.put(URI).set('Authorization', `bearer ${token}`).set('Accept', 'application/json')
+        .send({ sample: 'XXXX' })
+        .end((err, res) => {
+            chai.expect(res.status).to.eq(404)
+            chai.expect(res.body).to.have.all.keys('text')
+            chai.expect(res.body.text).to.be.a('string')
+            chai.expect(res.body.text).to.equal('ERROR')
+            done()
+        })
+    })
+
+    it('SAMPLE CONTROLLER ERROR DELETE REMOVE', (done) => {
+        request.delete(URI).set('Authorization', `bearer ${token}`).set('Accept', 'application/json')
+        .send({ sample: 'XXXX' })
+        .end((err, res) => {
+            chai.expect(res.status).to.eq(404)
+            done()
+        })
+    })
+
 })
