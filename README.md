@@ -1,11 +1,12 @@
 # Typescript-restful-starter
-Node.js + ExpressJS + SequelizeJS + Typescript + JWT + ES2015 + Clustering + Tslint
+Node.js + ExpressJS + SequelizeJS + Typescript + JWT + ES2015 + Clustering + Tslint + Mocha + Chai + Superagent
 ------------
 # What use this Starter App?
 - **JWT** for protect routes.
 - **Clustering mode** for load many forks depending of the CPU's units.
 - **Sequalize** for ORM.
 - **ES2015** with the last of javascript like promises and async/await
+- **Mocha - chai** for test
 ##Structure
 ```json
 /app
@@ -48,7 +49,9 @@ Typescript, nodemon and ts-node for development
 ## Start App
 When execute any of this commands the app start with clustering, creating many cluster apps depending of the numbers of CPU's your computer had.
 ## Development
-		npm run dev -> (nodemon --watch '**/*.ts' --exec 'ts-node' server.ts)
+		npm run dev -> (./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' server.ts)
 	In Development mode the express app is starter with nodemon for automatic refresh when do changes.
 ## Production
-		npm start -> (ts-node server.ts)
+		npm start -> (./node_modules/.bin/ts-node server.ts)
+## Test
+		npm test -> (/node_modules/.bin/_mocha ./node_modules/.bin/_ts-node test/TestRouter.ts)
