@@ -4,7 +4,7 @@ import { config } from '../../config'
 
 export class JWTService {
 
-    public signToken(params: {name: string, role: string}, options?: string): Promise<string> {
+    public signToken(params: {name: string, role: string}, options?: any): Promise<any> {
         return new Promise((resolve, reject) => {
             JWT.sign(params, config.SECRET, options || null, (err, token) => {
                 if (err)  reject(err)
@@ -13,7 +13,7 @@ export class JWTService {
         })
     }
 
-    public verifyToken(token: string, options: string): Promise<string> {
+    public verifyToken(token: string, options: string): Promise<any> {
         return new Promise((resolve, reject) => {
            JWT.verify(token, config.SECRET, (err, decoded) => {
                 if (err) reject(err)
