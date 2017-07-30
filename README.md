@@ -7,7 +7,8 @@ Node.js + ExpressJS + SequelizeJS + Typescript + JWT + ES2015 + Clustering + Tsl
 - **Sequalize** for ORM.
 - **ES2015** with the last of javascript like promises and async/await
 - **Mocha - chai** for test
-##Structure
+
+## Structure
 ```json
 /app
 	/controllers (Controllers of the app)
@@ -52,6 +53,10 @@ When execute any of this commands the app start with clustering, creating many c
 		npm run dev -> (./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' server.ts)
 	In Development mode the express app is starter with nodemon for automatic refresh when do changes.
 ## Production
-		npm start -> (./node_modules/.bin/ts-node server.ts)
+		npm start -> (npm run build && node dist/server.js)
+## Build
+		npm run build -> (npm run clean && ./node_modules/.bin/tsc --outDir dist)
+## Clean
+		npm run build -> (rm -rf dist)
 ## Test
 		npm test -> (/node_modules/.bin/_mocha ./node_modules/.bin/_ts-node test/TestRouter.ts)
