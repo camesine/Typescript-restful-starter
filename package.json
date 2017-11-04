@@ -41,6 +41,7 @@
     "superagent": "^3.5.2",
     "token-extractor": "^0.1.6",
     "ts-node": "^3.0.4",
+    "typeorm": "^0.1.2",
     "typescript": "^2.3.3"
   },
   "devDependencies": {
