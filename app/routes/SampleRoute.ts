@@ -13,10 +13,10 @@ export class SampleRoute {
     }
 
     private loadActions() {
-        this.router.get('/', this.Controller.index)
-        this.router.get('/:id', this.Controller.find)
-        this.router.post('/', this.Controller.create)
-        this.router.put('/', this.Controller.update)
+        this.router.get('/', this.Controller.Index)
+        this.router.get('/:id', this.Controller.Find)
+        this.router.post('/', this.Controller.Create)
+        this.router.put('/', this.Controller.Update)
         this.router.delete('/', this.Controller.delete)
     }
 

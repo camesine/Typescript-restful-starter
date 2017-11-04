@@ -1,6 +1,5 @@
-import { Sample } from '../app/models/Sample'
+import { Connection } from '../config/db/Connection'
 
-
-Sample.sync().then(() => {
-    console.log("Table sample created")
+Connection.then(conn => {
+    conn.migrations
 })

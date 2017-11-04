@@ -2,12 +2,13 @@ import { config } from '../config'
 import * as chai from 'chai'
 import { JWTService } from '../app/services/JWTService'
 import { SampleService } from '../app/services/SampleService'
+import { SampleRepository } from '../app/repository/SampleRepository'
+import { getCustomRepository } from 'typeorm'
+import { Connection } from '../config/db/Connection'
+import { Sample } from '../app/entity/Sample'
 import * as request from 'superagent'
-import { ISampleAttribute } from '../app/models/Sample'
 
 const URI: string = 'http://127.0.0.1:' + config.PORT
-const JWTAccess: JWTService = new JWTService()
-const SampleAccess: SampleService = new SampleService()
 let token: string = null
 let IdRecord: number = null
 let IdRecordTwo: number = null
@@ -16,21 +17,29 @@ describe('ALL ', () => {
 
     before((done) => {
 
-        Promise.all([
-            JWTAccess.signToken({ name: 'name', role: 'rol' }),
-            SampleAccess.create({ text: "SAMPLE TEXT" })
-        ]).then((res) => {
-            token = res[0]
-            IdRecord = res[1].id
-            done()
-        })
-    
+        let sample = new Sample()
+        sample.text = "SAMPLE TEXT"
+
+        Connection.then(conn => {
+
+            const JWTAccess: JWTService = new JWTService()
+            const SampleAccess: SampleService = new SampleService()
+
+            Promise.all([
+                JWTAccess.signToken({ name: 'name', role: 'rol' }),
+                getCustomRepository(SampleRepository).save(sample)
+            ]).then((res) => {
+                token = res[0]
+                IdRecord = res[1].id
+                done()
+            })
+        })    
     })
 
     after((done) => {
         Promise.all([
-            SampleAccess.delete({ id: IdRecord }),
-            SampleAccess.delete({ id: IdRecordTwo })
+            getCustomRepository(SampleRepository).deleteById(IdRecord),
+            getCustomRepository(SampleRepository).deleteById(IdRecordTwo),
         ]).then(() => done())
     })
 
@@ -62,9 +71,8 @@ describe('ALL ', () => {
 
 
     it('SAMPLE CONTROLLER POST CREATE', (done) => {
-        const sample: ISampleAttribute = { text: 'Sample text 100' }
         request.post(URI).set('Authorization', `bearer ${token}`).set('Accept', 'application/json')
-        .send({ sample })
+        .send({ text: 'Sample text 100' })
         .end((err, res) => {
             chai.expect(res.status).to.eq(200)
             chai.expect(res.body).to.have.all.keys('id', 'text')
@@ -77,20 +85,17 @@ describe('ALL ', () => {
     })
 
     it('SAMPLE CONTROLLER PUT UPDATE', (done) => {
-        const sample: ISampleAttribute = { id: IdRecord, text: 'Sample text updateado' }
         request.put(URI).set('Authorization', `bearer ${token}`).set('Accept', 'application/json')
-        .send({ sample })
+        .send({ id: IdRecord, text: 'Sample text updateado' })
         .end((err, res) => {
             chai.expect(res.status).to.eq(200)
-            chai.expect(res.body[0]).to.be.a('number')
             done()
         })
     })
 
     it('SAMPLE CONTROLLER DELETE REMOVE', (done) => {
-        const sample: ISampleAttribute = { id: IdRecord }
         request.delete(URI).set('Authorization', `bearer ${token}`).set('Accept', 'application/json')
-        .send({ sample })
+        .send({ id: IdRecord })
         .end((err, res) => {
             chai.expect(res.status).to.eq(204)
             done()
