@@ -1,37 +1,21 @@
-import { ISampleAttribute, ISampleInstance, ISampleModel, Sample } from '../models/Sample'
+import { Sample } from '../entity/Sample'
+import { SampleRepository } from '../repository/SampleRepository'
+import { getCustomRepository } from 'typeorm'
 
 export class SampleService {
 
-    public Sample: ISampleModel
-
+    private SampleRepository: SampleRepository
+    
     constructor() {
-        this.Sample = Sample
+        this.SampleRepository = getCustomRepository(SampleRepository)
     }
 
-    public create = (sample: ISampleAttribute) => {
-        return this.Sample.create(sample)
+    public FindByText = (_Sample : Sample) : Promise<Sample[]> => {
+        return this.SampleRepository.find(_Sample)
     }
 
-    public list = () => {
-       return this.Sample.findAll()
-    }
-
-    public find = (id: number) => {
-       return this.Sample.findById(id)
-    }
-
-    public update = (sample: ISampleAttribute) => {
-        return this.Sample.update({
-            text: sample.text,
-        }, {
-            where: {
-                id: sample.id,
-            },
-        })
-    }
-
-    public delete = (sample: ISampleAttribute) => {
-        return this.Sample.destroy({where: {id: sample.id}})
+    public BulkCreate = (_Samples : Sample[]) : Promise<Sample[]> => {
+        return this.SampleRepository.BukCreate(_Samples)
     }
 
 }

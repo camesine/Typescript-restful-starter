@@ -6,6 +6,6 @@ export const config = {
         DB: "test",
         USER: "root",
         PASSWORD: "",
-        DIALECT: "mariadb",
+        DIALECT: "mysql",
     },
 }

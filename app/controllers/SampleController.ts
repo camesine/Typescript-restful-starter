@@ -1,20 +1,24 @@
 import * as express from 'express'
-import { ISampleAttribute } from '../models/Sample'
 import { SampleService } from '../services/SampleService'
+import { SampleRepository } from '../repository/SampleRepository'
+import { Sample } from '../entity/Sample'
+import { getCustomRepository } from 'typeorm'
 
 export class SampleController {
 
     private SampleService: SampleService
+    private SampleRepository: SampleRepository
 
     constructor() {
         this.SampleService = new SampleService()
+        this.SampleRepository = getCustomRepository(SampleRepository)
     }
 
-    public index = async (req: express.Request, res: express.Response) => {
-        const result = await this.SampleService.list()
-        res.send(result)
+    public Index = async (req: express.Request, res: express.Response) => {
+        const SampleList = await this.SampleRepository.find()
+        res.send(SampleList)
     }
-
+/*
     public create = async (req: express.Request, res: express.Response) => {
         const sample: ISampleAttribute = req.body.sample
         if(!sample.text) res.status(404).send({ text: 'ERROR' }).end(true)
@@ -44,5 +48,5 @@ export class SampleController {
         if(!result) res.status(404).send({ text: 'NOT FOUND' })
         res.sendStatus(204)
     }
-
+*/
 }
