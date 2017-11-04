@@ -4,6 +4,7 @@ import * as cors from 'cors'
 import * as express from 'express'
 import * as http from 'http'
 import * as methodOverride from 'method-override'
+import { Connection } from './config/db/Connection'
 import { cpus } from 'os'
 import { Routes } from './app/Router'
 import { config } from './config'
@@ -14,12 +15,12 @@ class AppServer {
     public routes: express.Router
 
     constructor() {
-        this.app = express()
-        this.expressConfig()
-        this.routerConfig()
+       this.app = express()
+       // this.expressConfig()
+       // this.routerConfig()
     }
 
-    private expressConfig(): void {
+    public expressConfig(): void {
         this.app.use(bodyParser.urlencoded({extended: true}))
         this.app.use(bodyParser.json({ limit: '50mb'} ))
         this.app.use(methodOverride())
@@ -40,7 +41,7 @@ class AppServer {
         })
     }
 
-    private routerConfig(): void {
+    public routerConfig(): void {
         const r = new Routes()
         r.routes.forEach((row) => {
             this.app.use(row.path, row.middleware, row.handler)
@@ -72,6 +73,10 @@ class AppServer {
         })
     }
 
+    public ConnectDB(): Promise<any> {
+        return Connection
+    }
+
 }
 
 if (cluster.isMaster) {
@@ -90,42 +95,47 @@ if (cluster.isMaster) {
 
     const port: number = process.env.PORT || config.PORT || 3000
     const appServer = new AppServer()
-    const app = appServer.app
-    const server = http.createServer(app)
 
-    server.listen(port)
-    server.on("error", onError)
-    server.on("listening", onListening)
-
-    function onListening() {
-        const addr = server.address()
-        const bind = typeof addr === "string"
-            ? "pipe " + addr
-            : "port " + addr.port
-        console.log('Server is running in process ' + process.pid + ' listening on PORT ' + addr.port + '\n')
-    }
-
-    function onError(error: any) {
-        if (error.syscall !== "listen") {
-            throw error
+    appServer.ConnectDB().then(conn => {
+        const app = appServer.app
+        const server = http.createServer(app)
+        appServer.expressConfig()
+        appServer.routerConfig()
+        server.listen(port)
+        server.on("error", onError)
+        server.on("listening", onListening)
+    
+        function onListening() {
+            const addr = server.address()
+            const bind = typeof addr === "string"
+                ? "pipe " + addr
+                : "port " + addr.port
+            console.log('Server is running in process ' + process.pid + ' listening on PORT ' + addr.port + '\n')
         }
-
-        const bind = typeof port === "string"
-            ? "Pipe " + port
-            : "Port " + port
-
-        switch (error.code) {
-            case "EACCES":
-                console.error(bind + " requires elevated privileges")
-                process.exit(1)
-                break
-            case "EADDRINUSE":
-                console.error(bind + " is already in use")
-                process.exit(1)
-                break
-            default:
+    
+        function onError(error: any) {
+            if (error.syscall !== "listen") {
                 throw error
+            }
+    
+            const bind = typeof port === "string"
+                ? "Pipe " + port
+                : "Port " + port
+    
+            switch (error.code) {
+                case "EACCES":
+                    console.error(bind + " requires elevated privileges")
+                    process.exit(1)
+                    break
+                case "EADDRINUSE":
+                    console.error(bind + " is already in use")
+                    process.exit(1)
+                    break
+                default:
+                    throw error
+            }
         }
-    }
+    })
+ 
 
 }
