@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "npm run build && node dist/Index.js",
-    "dev": "./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' server.ts",
+    "dev": "./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' Index.ts",
     "test": "./node_modules/.bin/_mocha ./node_modules/.bin/_ts-node test/TestRouter.ts",
     "build": "npm run clean && ./node_modules/.bin/tsc --outDir dist",
     "clean": "rm -rf dist"
