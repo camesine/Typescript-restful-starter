@@ -4,9 +4,9 @@ Node.js + ExpressJS + SequelizeJS + Typescript + JWT + ES2015 + Clustering + Tsl
 # What use this Starter App?
 - **JWT** for protect routes.
 - **Clustering mode** for load many forks depending of the CPU's units.
-- **Sequalize** for ORM.
+- **Typeorm** for ORM.
 - **ES2015** with the last of javascript like promises and async/await
-- **Mocha - chai** for test
+- **Mocha - Chai** for test
 
 ## Structure
 ```json
@@ -15,16 +15,18 @@ Node.js + ExpressJS + SequelizeJS + Typescript + JWT + ES2015 + Clustering + Tsl
 	/middlewares (Middlewares for the routes of the app)
 	/routes (Routes for Controllers of the app)
 	/service (Services for using in any Controller)
-	/models (Models configuration for use)
-	Router.ts (Config file for Routing)
+	/entity (Models configuration for use)
+	/repository (Custom queries)
 /config
-	/db (DB configuration for use)
+	/Router.ts (Config file for Routing)
+	/Database (DB configuration for use)
+	/Server.ts (Server configuration)
 /tasks
 	migrate.ts (Script file for create the table for the test case)
 config.ts (Config file for the app)
 tsconfig.json (File configuration typescript)
 tslint.json (File configuration rules typescript)
-server.ts (Main file to start the app)
+Index.ts (Main file to start the app)
 ```
 # Install
 1. First clone this repository.
@@ -53,7 +55,7 @@ When execute any of this commands the app start with clustering, creating many c
 		npm run dev -> (./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' server.ts)
 	In Development mode the express app is starter with nodemon for automatic refresh when do changes.
 ## Production
-		npm start -> (npm run build && node dist/server.js)
+		npm start -> (npm run build && node dist/Index.js)
 ## Build
 		npm run build -> (npm run clean && ./node_modules/.bin/tsc --outDir dist)
 ## Clean
