@@ -3,17 +3,15 @@ import { JWTController } from '../controllers/JWTController'
 
 export class JWTRoute {
 
-    public router: express.Router
-    private Controller: JWTController
+    public static getRoutes(): express.Router {
 
-    constructor() {
-        this.router = express.Router()
-        this.Controller = new JWTController()
-        this.loadActions()
-    }
+        const Router = express.Router()
+        const Controller = new JWTController()
 
-    private loadActions() {
-        this.router.post('/', this.Controller.index)
+        Router.post('/', Controller.index)
+
+        return Router
+
     }
 
 }
