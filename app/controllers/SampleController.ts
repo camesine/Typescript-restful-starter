@@ -7,25 +7,21 @@ import { getCustomRepository } from 'typeorm'
 export class SampleController {
 
     private SampleService: SampleService
-    private SampleRepository: SampleRepository
 
     constructor() {
-
         this.SampleService = new SampleService()
-        this.SampleRepository = getCustomRepository(SampleRepository)
-    
     }
 
     public Index = async (req: express.Request, res: express.Response) => {
-        const SampleList = await this.SampleRepository.find()
+        const SampleList = await Sample.find()
         res.send(SampleList)
     }
 
     public Find = async (req: express.Request, res: express.Response) => {
 
         const id: number = req.params.id
-        const Sample = await this.SampleRepository.findOneById(id)
-        Sample ? res.status(200).send(Sample) : res.status(404).send({ text: 'NOT FOUND' })
+        const sample = await Sample.findOneById(id)
+        sample ? res.status(200).send(sample) : res.status(404).send({ text: 'NOT FOUND' })
 
     }
 
@@ -35,7 +31,7 @@ export class SampleController {
         if(!text) res.status(404).send({ text: 'ERROR' }).end(true)
         const sample = new Sample()
         sample.text = text
-        const result = await this.SampleRepository.save(sample).catch(err => res.status(404).send({ text: 'ERROR' }))
+        const result = await Sample.save(sample).catch(err => res.status(404).send({ text: 'ERROR' }))
         res.status(200).send(result)
 
     }
@@ -46,7 +42,7 @@ export class SampleController {
         const sample = new Sample()
         sample.id = req.body.id
         sample.text = req.body.id
-        const result = await this.SampleRepository.save(sample).catch(err => res.status(404).send({ text: 'ERROR' }))
+        const result = await Sample.save(sample).catch(err => res.status(404).send({ text: 'ERROR' }))
         result ? res.status(200).send() : res.status(404).send({ text: 'NOT FOUND' })
 
     }
@@ -55,7 +51,7 @@ export class SampleController {
 
         const id: number = req.body.id
         if(!id) res.status(404).send({ text: 'ERROR' }).end(true)
-        await this.SampleRepository.removeById(id).catch(err => res.status(404).send({ text: 'ERROR' }))
+        await Sample.removeById(id).catch(err => res.status(404).send({ text: 'ERROR' }))
         res.status(204).send()
     
     }

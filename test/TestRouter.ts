@@ -4,7 +4,7 @@ import { JWTService } from '../app/services/JWTService'
 import { SampleService } from '../app/services/SampleService'
 import { SampleRepository } from '../app/repository/SampleRepository'
 import { getCustomRepository } from 'typeorm'
-import { Connection } from '../config/db/Connection'
+import { Connection } from '../config/Database'
 import { Sample } from '../app/entity/Sample'
 import * as request from 'superagent'
 
@@ -22,11 +22,10 @@ describe('ALL ', () => {
 
         Connection.then(conn => {
 
-            const JWTAccess: JWTService = new JWTService()
             const SampleAccess: SampleService = new SampleService()
 
             Promise.all([
-                JWTAccess.signToken({ name: 'name', role: 'rol' }),
+                JWTService.signToken({ name: 'name', role: 'rol' }),
                 getCustomRepository(SampleRepository).save(sample)
             ]).then((res) => {
                 token = res[0]
