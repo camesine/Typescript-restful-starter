@@ -6,7 +6,7 @@
     "jsRules": {},
     "rules": {
         "indent": [
-            true, 4
+            true, "tabs"
         ],
         "no-console": [
             false, "log", "error"
