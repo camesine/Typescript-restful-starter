@@ -1,5 +1,5 @@
 # Typescript-restful-starter
-Node.js + ExpressJS + SequelizeJS + Typescript + JWT + ES2015 + Clustering + Tslint + Mocha + Chai + Superagent
+Node.js + ExpressJS + TypeOrm + Typescript + JWT + ES2015 + Clustering + Tslint + Mocha + Chai + Superagent
 ------------
 # What use this Starter App?
 - **JWT** for protect routes.
