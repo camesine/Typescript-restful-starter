@@ -4,7 +4,7 @@ export const config = {
     DATABASE: {
         SERVER: "127.0.0.1",
         DB: "test",
-        USER: "root",
+        USER_DB: "root",
         PASSWORD: "",
         DIALECT: "mysql",
     },
