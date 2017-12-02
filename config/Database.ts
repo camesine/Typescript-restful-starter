@@ -4,7 +4,7 @@ import { Sample } from '../app/entity/Sample'
 
 const SERVER = process.env.SERVER || config.DATABASE.SERVER || 'localhost'
 const DATABASE = process.env.DB || config.DATABASE.DB || "test"
-const USER = process.env.USER || config.DATABASE.USER || 'root'
+const USER = process.env.USER_DB || config.DATABASE.USER_DB || 'root'
 const PASSWORD = process.env.PASSWORD || config.DATABASE.PASSWORD || ''
 const DIALECT = process.env.DIALECT || config.DATABASE.DIALECT || 'mysql'
 
@@ -18,6 +18,6 @@ export const Connection = createConnection({
     entities: [
         Sample
     ],
-    synchronize: false,
+    synchronize: true,
     logging: false
 })
