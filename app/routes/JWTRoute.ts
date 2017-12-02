@@ -6,9 +6,8 @@ export class JWTRoute {
     public static getRoutes(): express.Router {
 
         const Router = express.Router()
-        const Controller = new JWTController()
 
-        Router.post('/', Controller.index)
+        Router.post('/', JWTController.Index)
 
         return Router
 
