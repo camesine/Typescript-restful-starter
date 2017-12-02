@@ -13,7 +13,7 @@ let token: string = null
 let IdRecord: number = null
 let IdRecordTwo: number = null
 
-describe('ALL ', () => {
+describe('ALL TEST ROUTE', () => {
 
     before((done) => {
 
@@ -70,7 +70,9 @@ describe('ALL ', () => {
 
 
     it('SAMPLE CONTROLLER POST CREATE', (done) => {
-        request.post(URI).set('Authorization', `bearer ${token}`).set('Accept', 'application/json')
+        request.post(URI)
+        .set('Authorization', `bearer ${token}`)
+        .set('Accept', 'application/json')
         .send({ text: 'Sample text 100' })
         .end((err, res) => {
             chai.expect(res.status).to.eq(200)
@@ -84,7 +86,9 @@ describe('ALL ', () => {
     })
 
     it('SAMPLE CONTROLLER PUT UPDATE', (done) => {
-        request.put(URI).set('Authorization', `bearer ${token}`).set('Accept', 'application/json')
+        request.put(URI)
+        .set('Authorization', `bearer ${token}`)
+        .set('Accept', 'application/json')
         .send({ id: IdRecord, text: 'Sample text updateado' })
         .end((err, res) => {
             chai.expect(res.status).to.eq(200)
@@ -93,7 +97,8 @@ describe('ALL ', () => {
     })
 
     it('SAMPLE CONTROLLER DELETE REMOVE', (done) => {
-        request.delete(URI).set('Authorization', `bearer ${token}`).set('Accept', 'application/json')
+        request.delete(URI).set('Authorization', `bearer ${token}`)
+        .set('Accept', 'application/json')
         .send({ id: IdRecord })
         .end((err, res) => {
             chai.expect(res.status).to.eq(204)
@@ -103,7 +108,8 @@ describe('ALL ', () => {
 
     it('SAMPLE CONTROLLER GET NOT FIND ONE', (done) => {
         request.get(`${URI}/XXXX`)
-        .set('Authorization', `bearer ${token}`).set('Accept', 'application/json')
+        .set('Authorization', `bearer ${token}`)
+        .set('Accept', 'application/json')
         .end((err, res) => {
             chai.expect(res.status).to.eq(404)
             chai.expect(res.body).to.have.all.keys('text')
@@ -114,7 +120,8 @@ describe('ALL ', () => {
     })
  
     it('SAMPLE CONTROLLER ERROR POST CREATE', (done) => {
-        request.post(URI).set('Authorization', `bearer ${token}`).set('Accept', 'application/json')
+        request.post(URI).set('Authorization', `bearer ${token}`)
+        .set('Accept', 'application/json')
         .send({ sample: 'XXXX' })
         .end((err, res) => {
             chai.expect(res.status).to.eq(404)
@@ -126,7 +133,8 @@ describe('ALL ', () => {
     })
 
     it('SAMPLE CONTROLLER ERROR PUT UPDATE', (done) => {
-        request.put(URI).set('Authorization', `bearer ${token}`).set('Accept', 'application/json')
+        request.put(URI).set('Authorization', `bearer ${token}`)
+        .set('Accept', 'application/json')
         .send({ sample: 'XXXX' })
         .end((err, res) => {
             chai.expect(res.status).to.eq(404)
@@ -138,7 +146,8 @@ describe('ALL ', () => {
     })
 
     it('SAMPLE CONTROLLER ERROR DELETE REMOVE', (done) => {
-        request.delete(URI).set('Authorization', `bearer ${token}`).set('Accept', 'application/json')
+        request.delete(URI).set('Authorization', `bearer ${token}`)
+        .set('Accept', 'application/json')
         .send({ sample: 'XXXX' })
         .end((err, res) => {
             chai.expect(res.status).to.eq(404)
