@@ -3,6 +3,7 @@ import * as bodyParser from 'body-parser'
 import * as cors from 'cors'
 import * as express from 'express'
 import * as methodOverride from 'method-override'
+import * as morgan from 'morgan'
 import { Connection } from './Database'
 import { ROUTER } from './Router'
 
@@ -37,6 +38,7 @@ export class Server {
             next()
         })
 
+        this.app.use(morgan('combined'))
         this.app.use(cors())
 
         this.app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction): void => {
