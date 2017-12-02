@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, BaseEntity, Column } from 'typeorm'
 
 @Entity('sample')
 export class Sample extends BaseEntity {
@@ -8,5 +8,9 @@ export class Sample extends BaseEntity {
 
     @Column('text')
     public text: string
+
+    public static FindByText(sample: Sample): Promise<Sample[]> {
+        return this.find(sample)
+    }
 
 }
