@@ -13,23 +13,19 @@ interface IROUTER {
 
 export class ROUTER {
 
-    public static getRoutes(): IROUTER[] {
-
-        return [{
-            path: "/",
-            middleware: [SampleMiddleware.anyCheck, SampleMiddleware.anyCheckTwo],
-            handler: SampleRoute.getRoutes(),
-        },{
-            path: "/JWT",
-            middleware: [],
-            handler: JWTRoute.getRoutes(),
-        },
-        {
-            path: "/sample",
-            middleware: jwt({secret: config.SECRET}),
-            handler: SampleRoute.getRoutes(),
-        }]
-
-    }
+    public static Routes: IROUTER[] = [{
+        path: "/",
+        middleware: [SampleMiddleware.anyCheck, SampleMiddleware.anyCheckTwo],
+        handler: SampleRoute.Routes,
+    },{
+        path: "/JWT",
+        middleware: [],
+        handler: JWTRoute.getRoutes(),
+    },
+    {
+        path: "/sample",
+        middleware: jwt({secret: config.SECRET}),
+        handler: SampleRoute.Routes,
+    }]
 
 }
