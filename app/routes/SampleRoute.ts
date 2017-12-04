@@ -4,18 +4,11 @@ import { SampleMiddleware } from '../middlewares/SampleMiddleware'
 
 export class SampleRoute {
 
-    public static getRoutes(): express.Router {
-
-        const Router = express.Router()
-
-        Router.get('/', SampleController.All)
-        Router.get('/:id', SampleController.Find)
-        Router.post('/', [SampleMiddleware.CheckCreate], SampleController.Create)
-        Router.put('/', [SampleMiddleware.CheckUpdate], SampleController.Update)
-        Router.delete('/', [SampleMiddleware.CheckDelete], SampleController.Delete)
-
-        return Router
-
-    }
+    public static Routes: express.Router = express.Router()
+    .get('/', SampleController.All)
+    .get('/:id', SampleController.Find)
+    .post('/', [SampleMiddleware.CheckCreate], SampleController.Create)
+    .put('/', [SampleMiddleware.CheckUpdate], SampleController.Update)
+    .delete('/', [SampleMiddleware.CheckDelete], SampleController.Delete)
 
 }
