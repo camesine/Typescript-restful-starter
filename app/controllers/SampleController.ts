@@ -16,7 +16,7 @@ export class SampleController {
 
         const id: number = req.params.id
         const sample = await Sample.findOneById(id)
-        
+
         return sample ? res.status(200).send(sample) : res.status(404).send({ text: 'NOT FOUND' })
 
     }
