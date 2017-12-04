@@ -6,7 +6,7 @@
     "jsRules": {},
     "rules": {
         "indent": [
-            true, "tabs"
+            false
         ],
         "no-console": [
             false, "log", "error"
@@ -14,6 +14,10 @@
         "no-unused-variable": [
             true
         ],
+        "trailing-comma": false,
+        "member-ordering": false,
+        "space-before-function-paren": false,
+        "ordered-imports": false,
         "align": [
             true, "parameters", "statements"
         ],
