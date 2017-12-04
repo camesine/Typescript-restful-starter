@@ -1,19 +1,19 @@
 {
-  "name": "restful-starter",
+  "name": "typescript-restful-starter",
   "version": "0.1.0",
   "description": "kit starter node application",
   "main": "server.js",
   "scripts": {
     "start": "npm run build && node dist/Index.js",
     "dev": "./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' Index.ts",
-    "test": "./node_modules/.bin/_mocha ./node_modules/.bin/_ts-node test/TestRouter.ts",
+    "test": "./node_modules/.bin/_mocha --timeout 20000 ./node_modules/.bin/_ts-node test/TestRouter.ts",
     "build": "npm run clean && ./node_modules/.bin/tsc --outDir dist",
     "clean": "rm -rf dist"
   },
   "keywords": [
     "node",
     "express",
-    "sequelize",
+    "typeorm",
     "typescript",
     "tslint",
     "JWT",
