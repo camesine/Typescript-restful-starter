@@ -17,7 +17,7 @@ describe('ALL TEST ROUTE', () => {
 
     before((done) => {
 
-        let sample = new Sample()
+        const sample = new Sample()
         sample.text = "SAMPLE TEXT"
 
         Connection.then(conn => {
@@ -32,7 +32,7 @@ describe('ALL TEST ROUTE', () => {
                 IdRecord = res[1].id
                 done()
             })
-        })    
+        })
     })
 
     after((done) => {
@@ -52,7 +52,7 @@ describe('ALL TEST ROUTE', () => {
             chai.expect(res.body[0].text).to.be.a('string')
             done()
         })
-     
+
     })
 
     it('SAMPLE CONTROLLER GET FIND ONE', (done) => {
@@ -62,12 +62,11 @@ describe('ALL TEST ROUTE', () => {
             chai.expect(res.status).to.eq(200)
             chai.expect(res.body).to.be.a('object')
             chai.expect(res.body).to.have.all.keys('id', 'text')
-            chai.expect(res.body.text).to.be.a('string') 
+            chai.expect(res.body.text).to.be.a('string')
             done()
         })
-     
-    })
 
+    })
 
     it('SAMPLE CONTROLLER POST CREATE', (done) => {
         request.post(URI)
@@ -118,7 +117,7 @@ describe('ALL TEST ROUTE', () => {
             done()
         })
     })
- 
+
     it('SAMPLE CONTROLLER ERROR POST CREATE', (done) => {
         request.post(URI).set('Authorization', `bearer ${token}`)
         .set('Accept', 'application/json')
