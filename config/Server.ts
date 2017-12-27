@@ -51,7 +51,7 @@ export class Server {
 
     private ConfigurationRouter(): void {
 
-        for (const route of ROUTER.Routes) {
+        for (const route of ROUTER) {
             this.app.use(route.path, route.middleware, route.handler)
         }
 
