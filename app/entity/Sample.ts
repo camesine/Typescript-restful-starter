@@ -9,8 +9,8 @@ export class Sample extends BaseEntity {
     @Column('text')
     public text: string
 
-    public static FindByText(sample: Sample): Promise<Sample[]> {
-        return this.find(sample)
+    public static FindByText(text: string): Promise<Sample[]> {
+        return this.find({ where: { text } })
     }
 
 }
