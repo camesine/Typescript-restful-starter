@@ -5,6 +5,8 @@ import { Server } from './config/Server'
 
 if (cluster.isMaster) {
 
+    console.log(`\n -------------------> RUN ${process.env.NODE_ENV} ENVIRONMENT \n`)
+
     const numCPUs = cpus().length
 
     for (const cpu of cpus()) {

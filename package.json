@@ -4,8 +4,8 @@
   "description": "kit starter node application",
   "main": "server.js",
   "scripts": {
-    "start": "npm run build && node dist/Index.js",
-    "dev": "./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' Index.ts",
+    "start": "npm run build && NODE_ENV=PRODUCTION node dist/Index.js",
+    "dev": "./node_modules/.bin/nodemon --watch '**/*.ts' --exec NODE_ENV=DEV './node_modules/.bin/ts-node' Index.ts",
     "test": "./node_modules/.bin/_mocha --timeout 20000 ./node_modules/.bin/_ts-node test/TestRouter.ts",
     "build": "npm run clean && ./node_modules/.bin/tsc --outDir dist",
     "clean": "rm -rf dist"
@@ -26,7 +26,6 @@
     "@types/jsonwebtoken": "^7.2.0",
     "@types/method-override": "0.0.29",
     "@types/node": "^7.0.13",
-    "@types/sequelize": "^4.0.51",
     "body-parser": "^1.17.1",
     "cluster": "^0.7.7",
     "cors": "^2.8.3",
@@ -38,7 +37,6 @@
     "mysql": "^2.13.0",
     "os": "^0.1.1",
     "path": "^0.12.7",
-    "sequelize": "^3.30.4",
     "superagent": "^3.5.2",
     "token-extractor": "^0.1.6",
     "ts-node": "^3.0.4",
