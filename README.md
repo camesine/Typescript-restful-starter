@@ -21,8 +21,6 @@ Node.js + ExpressJS + TypeOrm + Typescript + JWT + ES2015 + Clustering + Tslint 
 	/Router.ts (Config file for Routing)
 	/Database (DB configuration for use)
 	/Server.ts (Server configuration)
-/tasks
-	migrate.ts (Script file for create the table for the test case)
 config.ts (Config file for the app)
 tsconfig.json (File configuration typescript)
 tslint.json (File configuration rules typescript)
@@ -35,30 +33,31 @@ Index.ts (Main file to start the app)
 		npm install
 3. Edit the file config/config.ts with your own settings:
 ```json
-	{
-		SECRET: "HltH3R3",
-		PORT: 1344,
-		DATABASE: {
-		SERVER: "127.0.0.1",
-			DB: "test",
-			USER: "root",
-			PASSWORD: "",
-			DIALECT: "mariadb",
-		},
-	}
+{
+    SECRET: "HltH3R3",
+    PORT: 1344,
+    local: {
+        SERVER: "127.0.0.1",
+        DB: "test",
+        USER_DB: "root",
+        PASSWORD: "",
+        DIALECT: "mysql",
+    },
+    production: {
+        SERVER: process.env.SERVER || 'localhost',
+        DB: process.env.DB || "prod",
+        USER_DB: process.env.USER_DB || 'root',
+        PASSWORD: process.env.PASSWORD || '',
+        DIALECT: process.env.DIALECT || 'mysql',
+    }
+}
+
 ```
-## Global dependencies
-Typescript, nodemon and ts-node for development
-## Start App
+# Start App
 When execute any of this commands the app start with clustering, creating many cluster apps depending of the numbers of CPU's your computer had.
-## Development
-		npm run dev -> (./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' server.ts)
-	In Development mode the express app is starter with nodemon for automatic refresh when do changes.
-## Production
-		npm start -> (npm run build && node dist/Index.js)
-## Build
-		npm run build -> (npm run clean && ./node_modules/.bin/tsc --outDir dist)
-## Clean
-		npm run build -> (rm -rf dist)
-## Test
-		npm test -> (/node_modules/.bin/_mocha ./node_modules/.bin/_ts-node test/TestRouter.ts)
+### Development: In Development mode the express app is starter with nodemon for automatic refresh when do changes.
+	npm run dev
+### Test: Run test in development environment
+	npm test
+### Production: Run app in production environment
+	npm start
