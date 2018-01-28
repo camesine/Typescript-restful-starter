@@ -1,11 +1,12 @@
 import { config } from './config'
+import { env } from 'process'
 import * as cluster from 'cluster'
 import { cpus } from 'os'
 import { Server } from './config/Server'
 
 if (cluster.isMaster) {
 
-    console.log(`\n -------------------> RUN ${process.env.NODE_ENV} ENVIRONMENT \n`)
+    console.log(`\n -------------------> RUN ${env.NODE_ENV} ENVIRONMENT \n`)
 
     const numCPUs = cpus().length
 
@@ -21,7 +22,7 @@ if (cluster.isMaster) {
 
 } else {
 
-    const port: number = process.env.PORT || config.PORT_APP || 3000
+    const port: number = env.PORT || config.PORT_APP || 3000
 
     new Server().Start().then(server => {
 
