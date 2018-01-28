@@ -8,7 +8,7 @@ import { Connection } from '../config/Database'
 import { Sample } from '../app/entity/Sample'
 import * as request from 'superagent'
 
-const URI: string = 'http://127.0.0.1:' + config.PORT
+const URI: string = 'http://127.0.0.1:' + config.PORT_APP
 let token: string = null
 let IdRecord: number = null
 let IdRecordTwo: number = null

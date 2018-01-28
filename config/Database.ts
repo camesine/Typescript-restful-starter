@@ -5,7 +5,7 @@ import { Sample } from '../app/entity/Sample'
 export const Connection = createConnection({
     type: config.DATABASE.DIALECT,
     host: config.DATABASE.SERVER,
-    port: 3306,
+    port: config.DATABASE.PORT_DB,
     username: config.DATABASE.USER_DB,
     password: config.DATABASE.PASSWORD,
     database: config.DATABASE.DB,

@@ -21,7 +21,7 @@ if (cluster.isMaster) {
 
 } else {
 
-    const port: number = process.env.PORT || config.PORT || 3000
+    const port: number = process.env.PORT || config.PORT_APP || 3000
 
     new Server().Start().then(server => {
 
