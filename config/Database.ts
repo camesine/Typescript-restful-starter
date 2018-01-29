@@ -1,9 +1,9 @@
-import { config } from '../config'
+import { config, DIALECT } from '../config'
 import { createConnection } from 'typeorm'
 import { Sample } from '../app/entity/Sample'
 
 export const Connection = createConnection({
-    type: config.DATABASE.DIALECT,
+    type: DIALECT,
     host: config.DATABASE.SERVER,
     port: config.DATABASE.PORT_DB,
     username: config.DATABASE.USER_DB,
