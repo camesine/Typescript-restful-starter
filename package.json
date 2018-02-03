@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "npm run build && NODE_ENV=PRODUCTION node dist/Index.js",
-    "dev": "./node_modules/.bin/nodemon --watch '**/*.ts' --exec NODE_ENV=DEV './node_modules/.bin/ts-node' Index.ts",
+    "dev": "NODE_ENV=DEV ./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' Index.ts",
     "test": "./node_modules/.bin/_mocha --timeout 20000 ./node_modules/.bin/_ts-node test/TestRouter.ts",
     "build": "npm run clean && ./node_modules/.bin/tsc --outDir dist",
     "clean": "rm -rf dist"
