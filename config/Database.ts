@@ -1,17 +1,17 @@
-import { config, DIALECT } from '../config'
-import { createConnection } from 'typeorm'
-import { Sample } from '../app/entity/Sample'
+import { createConnection } from "typeorm";
+import { Sample } from "../app/entity/Sample";
+import { config, DIALECT } from "../config";
 
 export const Connection = createConnection({
-    type: DIALECT,
-    host: config.DATABASE.SERVER,
-    port: config.DATABASE.PORT_DB,
-    username: config.DATABASE.USER_DB,
-    password: config.DATABASE.PASSWORD,
-    database: config.DATABASE.DB,
-    entities: [
-        Sample
-    ],
-    synchronize: true,
-    logging: false
-})
+  database: config.DATABASE.DB,
+  entities: [
+    Sample,
+  ],
+  host: config.DATABASE.SERVER,
+  logging: false,
+  password: config.DATABASE.PASSWORD,
+  port: config.DATABASE.PORT_DB,
+  synchronize: true,
+  type: DIALECT,
+  username: config.DATABASE.USER_DB,
+});

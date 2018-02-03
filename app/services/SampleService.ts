@@ -1,21 +1,21 @@
-import { Sample } from '../entity/Sample'
-import { SampleRepository } from '../repository/SampleRepository'
-import { getCustomRepository } from 'typeorm'
+import { getCustomRepository } from "typeorm";
+import { Sample } from "../entity/Sample";
+import { SampleRepository } from "../repository/SampleRepository";
 
 export class SampleService {
 
-    private SampleRepository: SampleRepository
+  private SampleRepository: SampleRepository;
 
-    constructor() {
-        this.SampleRepository = getCustomRepository(SampleRepository)
-    }
+  constructor() {
+    this.SampleRepository = getCustomRepository(SampleRepository);
+  }
 
-    public FindByText = (text: string): Promise<Sample[]> => {
-        return Sample.FindByText(text)
-    }
+  public FindByText = (text: string): Promise<Sample[]> => {
+    return Sample.FindByText(text);
+  }
 
-    public BulkCreate = (Samples: Sample[]): Promise<Sample[]> => {
-        return this.SampleRepository.BukCreate(Samples)
-    }
+  public BulkCreate = (Samples: Sample[]): Promise<Sample[]> => {
+    return this.SampleRepository.BukCreate(Samples);
+  }
 
 }

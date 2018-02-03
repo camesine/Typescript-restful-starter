@@ -1,16 +1,16 @@
-import { Entity, PrimaryGeneratedColumn, BaseEntity, Column } from 'typeorm'
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity('sample')
+@Entity("sample")
 export class Sample extends BaseEntity {
 
-    @PrimaryGeneratedColumn()
-    public id: number
+  public static FindByText(text: string): Promise<Sample[]> {
+    return this.find({ where: { text } });
+  }
 
-    @Column('text')
-    public text: string
+  @PrimaryGeneratedColumn()
+  public id: number;
 
-    public static FindByText(text: string): Promise<Sample[]> {
-        return this.find({ where: { text } })
-    }
+  @Column("text")
+  public text: string;
 
 }

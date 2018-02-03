@@ -1,25 +1,25 @@
-import { env } from 'process'
+import { env } from "process";
 
-export const DIALECT = 'mysql'
+export const DIALECT = "mysql";
 
 const LOCAL_CONFIGURATION = {
-    SERVER: '127.0.0.1',
-    PORT_DB: 3306,
-    DB: 'test',
-    USER_DB: 'root',
-    PASSWORD: ''
-}
+  DB: "test",
+  PASSWORD: "",
+  PORT_DB: 3306,
+  SERVER: "127.0.0.1",
+  USER_DB: "root",
+};
 
 const PRODUCTION_CONFIGURATION = {
-    SERVER: env.SERVER || 'localhost',
-    DB: env.DB || 'prod',
-    PORT_DB: Number(env.PORT_DB) || 3306,
-    USER_DB: env.USER_DB || 'root',
-    PASSWORD: env.PASSWORD || ''
-}
+  DB: env.DB || "prod",
+  PASSWORD: env.PASSWORD || "",
+  PORT_DB: Number(env.PORT_DB) || 3306,
+  SERVER: env.SERVER || "localhost",
+  USER_DB: env.USER_DB || "root",
+};
 
 export const config = {
-    SECRET: 'HltH3R3',
-    PORT_APP: 1344,
-    DATABASE: env.NODE_ENV === 'PRODUCTION' ? PRODUCTION_CONFIGURATION : LOCAL_CONFIGURATION
-}
+  DATABASE: env.NODE_ENV === "PRODUCTION" ? PRODUCTION_CONFIGURATION : LOCAL_CONFIGURATION,
+  PORT_APP: 1344,
+  SECRET: "HltH3R3",
+};

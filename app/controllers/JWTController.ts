@@ -1,12 +1,12 @@
-import * as express from 'express'
-import { JWTService } from '../services/JWTService'
+import * as express from "express";
+import { JWTService } from "../services/JWTService";
 
 export class JWTController {
 
-    public static async Index (req: express.Request, res: express.Response) {
-        const payload = req.body.payload
-        const token = await JWTService.signToken(payload)
-        return res.send(token)
-    }
+  public static async Index(req: express.Request, res: express.Response) {
+    const payload = req.body.payload;
+    const token = await JWTService.signToken(payload);
+    return res.send(token);
+  }
 
 }
