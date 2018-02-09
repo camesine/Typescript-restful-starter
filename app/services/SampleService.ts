@@ -10,11 +10,11 @@ export class SampleService {
     this.SampleRepository = getCustomRepository(SampleRepository);
   }
 
-  public FindByText = (text: string): Promise<Sample[]> => {
+  public FindByText(text: string): Promise<Sample[]> {
     return Sample.FindByText(text);
   }
 
-  public BulkCreate = (Samples: Sample[]): Promise<Sample[]> => {
+  public BulkCreate(Samples: Sample[]): Promise<Sample[]> {
     return this.SampleRepository.BukCreate(Samples);
   }
 
