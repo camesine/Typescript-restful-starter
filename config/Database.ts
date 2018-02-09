@@ -5,7 +5,7 @@ import { config, DIALECT } from "../config";
 export const Connection = createConnection({
   database: config.DATABASE.DB,
   entities: [
-    Sample,
+    "app/entity/**/*.ts",
   ],
   host: config.DATABASE.SERVER,
   logging: false,
