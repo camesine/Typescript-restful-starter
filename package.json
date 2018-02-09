@@ -4,8 +4,8 @@
   "description": "kit starter node application",
   "main": "server.js",
   "scripts": {
-    "start": "npm run build && NODE_ENV=PRODUCTION node dist/Index.js",
-    "dev": "NODE_ENV=DEV ./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' Index.ts",
+    "start": "npm run build && cross-env NODE_ENV=PRODUCTION node dist/Index.js",
+    "dev": "cross-env NODE_ENV=DEV ./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' Index.ts",
     "test": "./node_modules/.bin/_mocha --timeout 20000 ./node_modules/.bin/_ts-node test/TestRouter.ts",
     "build": "npm run clean && ./node_modules/.bin/tsc --outDir dist",
     "clean": "rm -rf dist"
@@ -48,6 +48,7 @@
     "@types/mocha": "^2.2.41",
     "@types/superagent": "^3.5.1",
     "chai": "^4.0.2",
+    "cross-env": "^5.1.3",
     "mocha": "^5.0.0",
     "nodemon": "^1.11.0",
     "tslint": "^5.9.1"
