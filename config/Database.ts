@@ -1,11 +1,11 @@
 import { createConnection } from "typeorm";
-import { Sample } from "../app/entity/Sample";
+import { Sample } from "../app/models/Sample.model";
 import { config, DIALECT } from "../config";
 
 export const Connection = createConnection({
   database: config.DATABASE.DB,
   entities: [
-    "app/entity/**/*{.js,.ts}",
+    Sample,
   ],
   host: config.DATABASE.SERVER,
   logging: false,

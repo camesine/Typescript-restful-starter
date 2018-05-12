@@ -1,6 +1,6 @@
 import * as express from "express";
-import { SampleController } from "../controllers/SampleController";
-import * as SampleMiddleware from "../middlewares/SampleMiddleware";
+import { SampleController } from "../controllers/Sample.controller";
+import * as SampleMiddleware from "../middlewares/Sample.middleware";
 
 export const SampleRoute: express.Router = express.Router()
 .get("/", SampleController.All)

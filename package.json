@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "npm run build && cd dist && cross-env NODE_ENV=PRODUCTION node Index.js",
-    "dev": "cross-env NODE_ENV=DEV ./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' Index.ts",
-    "test": "./node_modules/.bin/_mocha --timeout 20000 ./node_modules/.bin/_ts-node test/TestRouter.ts",
+    "dev": "cross-env NODE_ENV=DEV ./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' Index.ts --ignore 'test/*.ts'",
+    "test": "./node_modules/.bin/ts-node ./node_modules/.bin/_mocha --timeout 20000 test/*.ts --exit",
     "build": "npm run clean && tsc --outDir dist",
     "clean": "rimraf dist"
   },

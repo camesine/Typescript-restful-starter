@@ -1,8 +1,8 @@
 import * as express from "express";
 import * as jwt from "express-jwt";
-import { anyCheck, anyCheckTwo } from "../app/middlewares/SampleMiddleware";
-import { JWTRoute } from "../app/routes/JWTRoute";
-import { SampleRoute } from "../app/routes/SampleRoute";
+import { anyCheck, anyCheckTwo } from "../app/middlewares/Sample.middleware";
+import { JWTRoute } from "../app/routes/Jwt.route";
+import { SampleRoute } from "../app/routes/Sample.route";
 import { config } from "../config";
 
 interface IROUTER {

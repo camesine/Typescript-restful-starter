@@ -1,6 +1,6 @@
 import { getCustomRepository } from "typeorm";
-import { Sample } from "../entity/Sample";
-import { SampleRepository } from "../repository/SampleRepository";
+import { Sample } from "../models/Sample.model";
+import { SampleRepository } from "../repository/Sample.repository";
 
 export class SampleService {
 
