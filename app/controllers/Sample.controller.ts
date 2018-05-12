@@ -1,7 +1,7 @@
 import * as express from "express";
-import { Sample } from "../entity/Sample";
-import { SampleRepository } from "../repository/SampleRepository";
-import { SampleService } from "../services/SampleService";
+import { Sample } from "../models/Sample.model";
+import { SampleRepository } from "../repository/Sample.repository";
+import { SampleService } from "../services/Sample.service";
 
 export class SampleController {
 

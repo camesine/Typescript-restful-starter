@@ -1,10 +1,10 @@
 import * as chai from "chai";
 import * as request from "superagent";
 import { getCustomRepository } from "typeorm";
-import { Sample } from "../app/entity/Sample";
-import { SampleRepository } from "../app/repository/SampleRepository";
-import { JWTService } from "../app/services/JWTService";
-import { SampleService } from "../app/services/SampleService";
+import { Sample } from "../app/models/Sample.model";
+import { SampleRepository } from "../app/repository/Sample.repository";
+import { JWTService } from "../app/services/Jwt.service";
+import { SampleService } from "../app/services/Sample.service";
 import { config } from "../config";
 import { Connection } from "../config/Database";
 
