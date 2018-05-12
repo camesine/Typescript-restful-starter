@@ -57,7 +57,7 @@ if (cluster.isMaster) {
       const bind = typeof addr === "string"
       ? "pipe " + addr
       : "port " + addr.port;
-      console.log("Server is running in process " + process.pid + " listening on PORT " + addr.port + "\n");
+      console.log("Server is running in process " + process.pid + " listening on PORT " + port + "\n");
 
     });
 
