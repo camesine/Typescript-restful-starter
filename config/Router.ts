@@ -12,10 +12,6 @@ interface IROUTER {
 }
 
 export const ROUTER: IROUTER[] = [{
-  handler: SampleRoute,
-  middleware: [anyCheck, anyCheckTwo],
-  path: "/",
-}, {
   handler: JWTRoute,
   middleware: [],
   path: "/JWT",
@@ -23,4 +19,8 @@ export const ROUTER: IROUTER[] = [{
   handler: SampleRoute,
   middleware: jwt({secret: config.SECRET}),
   path: "/sample",
+}, {
+  handler: SampleRoute,
+  middleware: [anyCheck, anyCheckTwo],
+  path: "/",
 }];
