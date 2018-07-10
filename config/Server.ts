@@ -25,6 +25,10 @@ export class Server {
     });
   }
 
+  public App(): express.Application {
+        return this.app;
+  }
+
   private ExpressConfiguration(): void {
 
     this.app.use(bodyParser.urlencoded({extended: true}));
@@ -84,5 +88,5 @@ export class Server {
   private ConnectDB(): Promise<any> {
     return Connection;
   }
-
 }
+

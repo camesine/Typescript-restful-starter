@@ -1,5 +1,6 @@
 import * as chai from "chai";
-import * as request from "superagent";
+import * as request from "supertest";
+import * as express from "express";
 import { getCustomRepository } from "typeorm";
 import { Sample } from "../app/models/Sample.model";
 import { SampleRepository } from "../app/repository/Sample.repository";
@@ -7,11 +8,13 @@ import { JWTService } from "../app/services/Jwt.service";
 import { SampleService } from "../app/services/Sample.service";
 import { config } from "../config";
 import { Connection } from "../config/Database";
+import { Server } from "../config/Server";
 
-const URI: string = "http://127.0.0.1:" + config.PORT_APP;
 let token: string = null;
 let IdRecord: number = null;
 let IdRecordTwo: number = null;
+const server: Server = new Server();
+let app: express.Application = null;
 
 describe("ALL TEST ROUTE", () => {
 
@@ -20,16 +23,17 @@ describe("ALL TEST ROUTE", () => {
     const sample = new Sample();
     sample.text = "SAMPLE TEXT";
 
-    Connection.then(() => {
-      const SampleAccess: SampleService = new SampleService();
-      Promise.all([
-        JWTService.signToken({ name: "name", role: "rol" }),
-        getCustomRepository(SampleRepository).save(sample),
-      ]).then((res) => {
-        token = res[0];
-        IdRecord = res[1].id;
-        done();
-      });
+    server.Start().then(() => {
+        app = server.App();
+        const SampleAccess: SampleService = new SampleService();
+        Promise.all([
+            JWTService.signToken({name: "name", role: "rol"}),
+            getCustomRepository(SampleRepository).save(sample),
+        ]).then((res) => {
+            token = res[0];
+            IdRecord = res[1].id;
+            done();
+        });
     });
   });
 
@@ -41,9 +45,11 @@ describe("ALL TEST ROUTE", () => {
   });
 
   it("SAMPLE CONTROLLER GET FIND ALL", (done) => {
-    request.get(URI)
+    request(app).get("/")
     .set("Authorization", `bearer ${token}`).set("Accept", "application/json")
     .end((err, res) => {
+      console.log(`Error: ${err}`);
+      console.log(`Response: ${res}`);
       chai.expect(res.status).to.be.a("number");
       chai.expect(res.status).to.eq(200);
       chai.expect(res.body).to.be.a("array");
@@ -53,7 +59,7 @@ describe("ALL TEST ROUTE", () => {
   });
 
   it("SAMPLE CONTROLLER GET FIND ONE", (done) => {
-    request.get(`${URI}/${IdRecord}`)
+    request(app).get(`/${IdRecord}`)
       .set("Authorization", `bearer ${token}`).set("Accept", "application/json")
       .end((err, res) => {
       chai.expect(res.status).to.eq(200);
@@ -65,7 +71,7 @@ describe("ALL TEST ROUTE", () => {
   });
 
   it("SAMPLE CONTROLLER POST CREATE", (done) => {
-    request.post(URI)
+    request(app).post("/")
     .set("Authorization", `bearer ${token}`)
     .set("Accept", "application/json")
     .send({ text: "Sample text 100" })
@@ -80,7 +86,7 @@ describe("ALL TEST ROUTE", () => {
   });
 
   it("SAMPLE CONTROLLER PUT UPDATE", (done) => {
-    request.put(URI)
+    request(app).put("/")
     .set("Authorization", `bearer ${token}`)
     .set("Accept", "application/json")
     .send({ id: IdRecord, text: "Sample text updateado" })
@@ -91,7 +97,7 @@ describe("ALL TEST ROUTE", () => {
   });
 
   it("SAMPLE CONTROLLER DELETE REMOVE", (done) => {
-    request.delete(URI).set("Authorization", `bearer ${token}`)
+    request(app).delete("/").set("Authorization", `bearer ${token}`)
     .set("Accept", "application/json")
     .send({ id: IdRecord })
     .end((err, res) => {
@@ -101,7 +107,7 @@ describe("ALL TEST ROUTE", () => {
   });
 
   it("SAMPLE CONTROLLER GET NOT FIND ONE", (done) => {
-    request.get(`${URI}/XXXX`)
+    request(app).get(`/9999`)
     .set("Authorization", `bearer ${token}`)
     .set("Accept", "application/json")
     .end((err, res) => {
@@ -114,7 +120,7 @@ describe("ALL TEST ROUTE", () => {
   });
 
   it("SAMPLE CONTROLLER ERROR POST CREATE", (done) => {
-    request.post(URI).set("Authorization", `bearer ${token}`)
+    request(app).post("/").set("Authorization", `bearer ${token}`)
     .set("Accept", "application/json")
     .send({ sample: "XXXX" })
     .end((err, res) => {
@@ -127,7 +133,7 @@ describe("ALL TEST ROUTE", () => {
   });
 
   it("SAMPLE CONTROLLER ERROR PUT UPDATE", (done) => {
-    request.put(URI).set("Authorization", `bearer ${token}`)
+    request(app).put("/").set("Authorization", `bearer ${token}`)
     .set("Accept", "application/json")
     .send({ sample: "XXXX" })
     .end((err, res) => {
@@ -140,7 +146,7 @@ describe("ALL TEST ROUTE", () => {
   });
 
   it("SAMPLE CONTROLLER ERROR DELETE REMOVE", (done) => {
-    request.delete(URI).set("Authorization", `bearer ${token}`)
+    request(app).delete("/").set("Authorization", `bearer ${token}`)
     .set("Accept", "application/json")
     .send({ sample: "XXXX" })
     .end((err, res) => {
@@ -150,3 +156,4 @@ describe("ALL TEST ROUTE", () => {
   });
 
 });
+
