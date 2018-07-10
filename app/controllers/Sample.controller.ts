@@ -25,6 +25,7 @@ export class SampleController {
     const text: string = req.body.text;
     const sample = new Sample();
     sample.text = text;
+    sample.email = "someone@somewhere.com";
 
     try {
       const Result = await Sample.save(sample);
@@ -39,7 +40,8 @@ export class SampleController {
 
     const sample = new Sample();
     sample.id = req.body.id;
-    sample.text = req.body.id;
+    sample.text = req.body.text;
+    sample.email = req.body.email;
 
     try {
       const Result = await Sample.save(sample);
