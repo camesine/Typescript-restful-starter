@@ -6,21 +6,23 @@ import { SampleRoute } from "../app/routes/Sample.route";
 import { config } from "../config";
 
 interface IROUTER {
-  path: string;
-  middleware: any[];
-  handler: express.Router;
+    path: string;
+    middleware: any[];
+    handler: express.Router;
 }
 
 export const ROUTER: IROUTER[] = [{
-  handler: JWTRoute,
-  middleware: [],
-  path: "/JWT",
+    handler: JWTRoute,
+    middleware: [],
+    path: "/JWT",
 }, {
-  handler: SampleRoute,
-  middleware: jwt({secret: config.SECRET}),
-  path: "/sample",
+    handler: SampleRoute,
+    middleware: [
+        jwt({secret: config.SECRET}),
+    ],
+    path: "/sample",
 }, {
-  handler: SampleRoute,
-  middleware: [anyCheck, anyCheckTwo],
-  path: "/",
+    handler: SampleRoute,
+    middleware: [anyCheck, anyCheckTwo],
+    path: "/",
 }];
