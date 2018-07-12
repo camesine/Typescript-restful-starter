@@ -1,12 +1,13 @@
 # Typescript-restful-starter
-Node.js + ExpressJS + TypeOrm + Typescript + JWT + ES2015 + Clustering + Tslint + Mocha + Chai + Superagent
+Node.js + ExpressJS + TypeOrm + Typescript + JWT + ES2015 + Clustering + Tslint + Mocha + Chai + Supertest
 ------------
-# What use this Starter App?
-- **JWT** for protect routes.
-- **Clustering mode** for load many forks depending of the CPU's units.
+# What use is this Starter App?
+- **JWT** for protecting routes.
+- **Clustering mode** for loading many forks depending of the CPU's units.
 - **Typeorm** for ORM.
-- **ES2015** with the last of javascript like promises and async/await
-- **Mocha - Chai** for test
+- **ES2015** the lastest javascript version has promises and async/await
+- **Mocha - Chai** for testing
+- **Supertest** to load the entire server into the tests seamlessly
 
 ## Structure
 ```json

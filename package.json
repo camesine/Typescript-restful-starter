@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "npm run build && cd dist && cross-env NODE_ENV=PRODUCTION node Index.js",
-    "dev": "cross-env NODE_ENV=DEV ./node_modules/.bin/nodemon --watch '**/*.ts' --exec './node_modules/.bin/ts-node' Index.ts --ignore 'test/*.ts'",
-    "test": "./node_modules/.bin/ts-node ./node_modules/.bin/_mocha --timeout 20000 test/*.ts --exit",
+    "dev": "nodemon",
+    "test": "cross-env NODE_ENV=test nyc mocha test/**/*.ts",
     "build": "npm run clean && tsc --outDir dist",
     "clean": "rimraf dist"
   },
@@ -25,8 +25,9 @@
     "@types/express": "^4.11.1",
     "@types/jsonwebtoken": "^7.2.6",
     "@types/method-override": "0.0.31",
-    "@types/node": "^9.4.7",
+    "@types/node": "^10.5.2",
     "body-parser": "^1.18.2",
+    "class-validator": "^0.8.5",
     "cluster": "^0.7.7",
     "cors": "^2.8.4",
     "express": "^4.16.3",
@@ -39,20 +40,26 @@
     "path": "^0.12.7",
     "superagent": "^3.8.2",
     "token-extractor": "^0.1.6",
-    "ts-node": "^5.0.1",
-    "typeorm": "^0.1.16",
+    "ts-node": "^7.0.0",
+    "typeorm": "^0.2.7",
     "typescript": "^2.6.2"
   },
   "devDependencies": {
     "@types/chai": "^4.1.2",
-    "@types/mocha": "^2.2.48",
+    "@types/cors": "^2.8.4",
+    "@types/express-jwt": "0.0.40",
+    "@types/mocha": "^5.2.4",
+    "@types/morgan": "^1.7.35",
     "@types/rimraf": "2.0.2",
     "@types/superagent": "^3.5.7",
+    "@types/supertest": "^2.0.4",
     "chai": "^4.1.2",
     "cross-env": "^5.1.4",
     "mocha": "^5.0.4",
     "nodemon": "^1.17.2",
+    "nyc": "^12.0.2",
     "rimraf": "^2.6.2",
+    "supertest": "^3.1.0",
     "tslint": "^5.9.1"
   }
 }
