@@ -11,23 +11,23 @@ export class SampleService {
         return getCustomRepository(SampleRepository).bulkCreate(Samples);
     }
 
-    public static FindOneById(id: number) {
+    public static FindOneById(id: number): Promise<Sample> {
         return getCustomRepository(SampleRepository).findOneById(id);
     }
 
-    public static Find() {
+    public static Find(): Promise<Sample[]> {
         return getCustomRepository(SampleRepository).find();
     }
 
-    public static Remove(sample: Sample) {
+    public static Remove(sample: Sample): Promise<Sample> {
         return getCustomRepository(SampleRepository).remove(sample);
     }
 
-    public static RemoveById(id: number) {
+    public static RemoveById(id: number): Promise<Sample> {
         return getCustomRepository(SampleRepository).removeById(id);
     }
 
-    public static Save(sample: Sample) {
+    public static Save(sample: Sample): Promise<Sample> {
         return getCustomRepository(SampleRepository).save(sample);
     }
 }
