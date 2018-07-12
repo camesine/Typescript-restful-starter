@@ -6,61 +6,49 @@ import { Server } from "./config/Server";
 
 if (cluster.isMaster) {
 
-  console.log(`\n -------------------> RUN ${env.NODE_ENV} ENVIRONMENT \n`);
+    console.log(`\n -------------------> RUN ${env.NODE_ENV} ENVIRONMENT \n`);
 
-  const numCPUs = cpus().length;
+    for (const cpu of cpus()) {
+        cluster.fork();
+    }
 
-  for (const cpu of cpus()) {
-    cluster.fork();
-  }
-
-  cluster.on("exit", (worker, code, signal) => {
-    console.log("Worker " + worker.process.pid + " died with code: " + code + ", and signal: " + signal);
-    console.log("Starting a new worker");
-    cluster.fork();
-  });
+    cluster.on("exit", (worker, code, signal) => {
+        console.log("Worker " + worker.process.pid + " died with code: " + code + ", and signal: " + signal);
+        console.log("Starting a new worker");
+        cluster.fork();
+    });
 
 } else {
 
-  const port: number = Number(env.PORT) || config.PORT_APP || 3000;
+    const port: number = Number(env.PORT) || config.PORT_APP || 3000;
 
-  new Server().Start().then((server) => {
+    new Server().Start().then((server) => {
 
-    server.listen(port);
+        server.listen(port);
 
-    server.on("error", (error: any) => {
-      if (error.syscall !== "listen") {
-        throw error;
-      }
+        server.on("error", (error: any) => {
+            if (error.syscall !== "listen") {
+                throw error;
+            }
 
-      const bind = typeof port === "string"
-      ? "Pipe " + port
-      : "Port " + port;
+            switch (error.code) {
+                case "EACCES":
+                    console.error("Port requires elevated privileges");
+                    process.exit(1);
+                    break;
+                case "EADDRINUSE":
+                    console.error("Port is already in use");
+                    process.exit(1);
+                    break;
+                default:
+                    throw error;
+            }
+        });
 
-      switch (error.code) {
-        case "EACCES":
-          console.error(bind + " requires elevated privileges");
-          process.exit(1);
-          break;
-        case "EADDRINUSE":
-          console.error(bind + " is already in use");
-          process.exit(1);
-          break;
-        default:
-        throw error;
-      }
-    });
-
-    server.on("listening", () => {
-
-      const addr = server.address();
-      const bind = typeof addr === "string"
-      ? "pipe " + addr
-      : "port " + addr.port;
-      console.log("Server is running in process " + process.pid + " listening on PORT " + port + "\n");
+        server.on("listening", () => {
+            console.log("Server is running in process " + process.pid + " listening on PORT " + port + "\n");
+        });
 
     });
-
-  });
 
 }
