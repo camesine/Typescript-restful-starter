@@ -4,7 +4,10 @@ import * as express from "express";
 import * as http from "http";
 import * as methodOverride from "method-override";
 import * as morgan from "morgan";
+import { Options } from "morgan";
+import * as swaggerUi from "swagger-ui-express";
 import { Connection } from "./Database";
+import logger from "./Logger";
 import { ROUTER } from "./Router";
 
 export class Server {
@@ -34,8 +37,8 @@ export class Server {
 
     private ExpressConfiguration(): void {
 
-        this.app.use(bodyParser.urlencoded({extended: true}));
-        this.app.use(bodyParser.json({limit: "50mb"}));
+        this.app.use(bodyParser.urlencoded({ extended: true }));
+        this.app.use(bodyParser.json({ limit: "50mb" }));
         this.app.use(methodOverride());
 
         this.app.use((req, res, next): void => {
@@ -45,7 +48,17 @@ export class Server {
             next();
         });
 
-        this.app.use(morgan("combined"));
+        const swaggerDocument = require("../swagger.json");
+        this.app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+        this.app.use("/api/v1", express.Router);
+        const morganOptions: Options = {
+            stream: {
+                write: (message: string) => {
+                    logger.info(message.trim());
+                },
+            },
+        };
+        this.app.use(morgan("combined", morganOptions));
         this.app.use(cors());
 
         this.app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction): void => {

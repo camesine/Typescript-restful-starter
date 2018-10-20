@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug Typescript Node Cluster",
+        "sourceMaps": true,
+        "program": "${workspaceFolder}/Index.ts",
+        "outFiles": [
+          "${workspaceFolder}/dist/**/*.js"
+        ],
+        "autoAttachChildProcesses": true,
+        "preLaunchTask": "npm: build",
+      }
+    ]
+}
