@@ -3,22 +3,20 @@ import { env } from "process";
 export const DIALECT = "mysql";
 
 const LOCAL_CONFIGURATION = {
-	SERVER: "127.0.0.1",
-	PORT_DB: 3306,
 	DB: "test",
-	USER_DB: "root",
 	PASSWORD: "",
-	DIALECT: "mysql",
-}
+	PORT_DB: 3306,
+	SERVER: "127.0.0.1",
+	USER_DB: "root",
+};
 
 const PRODUCTION_CONFIGURATION = {
-	SERVER: process.env.SERVER || 'localhost',
-	DB: process.env.DB || "prod",
-	PORT_DB: process.env.PORT_DB || 3306,
-	USER_DB: process.env.USER_DB || 'root',
-	PASSWORD: process.env.PASSWORD || '',
-	DIALECT: process.env.DIALECT || 'mysql',
-}
+	DB: env.DB || "prod",
+	PASSWORD: env.PASSWORD || "",
+	PORT_DB: Number(env.PORT_DB) || 3306,
+	SERVER: env.SERVER || "localhost",
+	USER_DB: env.USER_DB || "root",
+};
 
 const options = {
 	file: {
