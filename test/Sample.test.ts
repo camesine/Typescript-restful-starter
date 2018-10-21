@@ -15,16 +15,14 @@ let app: express.Application;
 describe("Sample route", () => {
 
     before((done) => {
-
         const sample = new Sample();
         sample.text = "SAMPLE TEXT";
         sample.email = "someone@somewhere.com";
-
         server.Start().then(() => {
             app = server.App();
             Promise.all([
                 JWTService.signToken({name: "name", role: "rol"}),
-                SampleService.Save(sample),
+                SampleService.save(sample),
             ]).then((res) => {
                 token = res[0];
                 IdRecord = res[1].id;
@@ -34,13 +32,13 @@ describe("Sample route", () => {
     });
 
     after(async () => {
-        const sampleOne = await SampleService.FindOneById(IdRecord);
-        const sampleTwo = await SampleService.FindOneById(IdRecordTwo);
+        const sampleOne = await SampleService.findOneById(IdRecord);
+        const sampleTwo = await SampleService.findOneById(IdRecordTwo);
         if (sampleOne) {
-            await SampleService.Remove(sampleOne);
+            await SampleService.remove(sampleOne);
         }
         if (sampleTwo) {
-            await SampleService.Remove(sampleTwo);
+            await SampleService.remove(sampleTwo);
         }
     });
 

@@ -4,52 +4,47 @@ import { SampleService } from "../services/Sample.service";
 
 export class SampleController {
 
-    public static async All(req: express.Request, res: express.Response) {
-        const SampleList = await SampleService.Find();
-        return res.send(SampleList);
+    public static async all(req: express.Request, res: express.Response) {
+        const sampleList = await SampleService.find();
+        return res.send(sampleList);
     }
 
-    public static async Find(req: express.Request, res: express.Response) {
+    public static async find(req: express.Request, res: express.Response) {
         const id: number = req.params.id;
-        const sample = await SampleService.FindOneById(id);
-        return sample ? res.status(200).send(sample) : res.status(404).send({text: "NOT FOUND"});
+        const sample = await SampleService.findOneById(id);
+        return sample ? res.status(200).send(sample) : res.status(404).send({ text: "NOT FOUND" });
     }
 
-    public static async Create(req: express.Request, res: express.Response) {
+    public static async create(req: express.Request, res: express.Response) {
         const text: string = req.body.text;
         const sample = new Sample();
         sample.text = text;
         sample.email = "someone@somewhere.com";
-
         try {
-            const Result = await SampleService.Save(sample);
-            return res.status(200).send(Result);
+            const result = await SampleService.save(sample);
+            return res.status(200).send(result);
         } catch (ex) {
-            return res.status(404).send({text: "ERROR"});
+            return res.status(404).send({ text: "ERROR" });
         }
     }
 
-    public static async Update(req: express.Request, res: express.Response) {
-
+    public static async update(req: express.Request, res: express.Response) {
         const sample = new Sample();
         sample.id = req.body.id;
         sample.text = req.body.text;
         sample.email = req.body.email;
-
         try {
-            const Result = await SampleService.Save(sample);
-            return Result ? res.status(200).send() : res.status(404).send({text: "NOT FOUND"});
+            const result = await SampleService.save(sample);
+            return result ? res.status(200).send() : res.status(404).send({ text: "NOT FOUND" });
         } catch (ex) {
             return res.status(404).send({text: "ERROR"});
         }
-
     }
 
-    public static async Delete(req: express.Request, res: express.Response) {
+    public static async delete(req: express.Request, res: express.Response) {
         const id: number = req.body.id;
-
         try {
-            await SampleService.RemoveById(id);
+            await SampleService.removeById(id);
             return res.status(204).send();
         } catch (ex) {
             return res.status(404).send({text: "ERROR"});
