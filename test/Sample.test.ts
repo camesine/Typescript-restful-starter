@@ -130,10 +130,7 @@ describe("Sample route", () => {
             .set("Accept", "application/json")
             .send({sample: "XXXX"})
             .end((err: Error, res: supertest.Response) => {
-                chai.expect(res.status).to.eq(404);
-                chai.expect(res.body).to.have.all.keys("text");
-                chai.expect(res.body.text).to.be.a("string");
-                chai.expect(res.body.text).to.equal("ERROR");
+                chai.expect(res.status).to.eq(400);
                 done();
             });
     });
@@ -143,10 +140,7 @@ describe("Sample route", () => {
             .set("Accept", "application/json")
             .send({sample: "XXXX"})
             .end((err: Error, res: supertest.Response) => {
-                chai.expect(res.status).to.eq(404);
-                chai.expect(res.body).to.have.all.keys("text");
-                chai.expect(res.body.text).to.be.a("string");
-                chai.expect(res.body.text).to.equal("ERROR");
+                chai.expect(res.status).to.eq(400);
                 done();
             });
     });
@@ -156,7 +150,7 @@ describe("Sample route", () => {
             .set("Accept", "application/json")
             .send({sample: "XXXX"})
             .end((err: Error, res: supertest.Response) => {
-                chai.expect(res.status).to.eq(404);
+                chai.expect(res.status).to.eq(400);
                 done();
             });
     });
