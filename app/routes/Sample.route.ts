@@ -1,11 +1,13 @@
-import * as express from "express";
+import { Request, Response, Router } from "express";
 import { SampleController } from "../controllers/Sample.controller";
 import { createSchema, deleteSchema, updateSchema } from "../middlewares/schemas/Sample.schemas";
 import { validator } from "../middlewares/Validator.middleware";
 
-export const SampleRoute: express.Router = express.Router()
-    .get("/", SampleController.all)
-    .get("/:id", SampleController.find)
-    .post("/", [ validator(createSchema) ], SampleController.create)
-    .put("/", [ validator(updateSchema) ], SampleController.update)
-    .delete("/", [ validator(deleteSchema) ], SampleController.delete);
+const Controller = new SampleController();
+
+export const SampleRoute: Router = Router()
+    .get("/", (req: Request, res: Response) => Controller.all(req, res))
+    .get("/:id", (req: Request, res: Response) => Controller.find(req, res))
+    .post("/", [ validator(createSchema) ], (req: Request, res: Response) => Controller.create(req, res))
+    .put("/", [ validator(updateSchema) ], (req: Request, res: Response) => Controller.update(req, res))
+    .delete("/", [ validator(deleteSchema) ], (req: Request, res: Response) => Controller.delete(req, res));

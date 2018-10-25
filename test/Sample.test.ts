@@ -12,6 +12,8 @@ let IdRecordTwo: number;
 const server: Server = new Server();
 let app: express.Application;
 
+const sampleService = new SampleService();
+
 describe("Sample route", () => {
 
     before((done) => {
@@ -22,7 +24,7 @@ describe("Sample route", () => {
             app = server.App();
             Promise.all([
                 JWTService.signToken({name: "name", role: "rol"}),
-                SampleService.save(sample),
+                sampleService.save(sample),
             ]).then((res) => {
                 token = res[0];
                 IdRecord = res[1].id;
@@ -32,13 +34,13 @@ describe("Sample route", () => {
     });
 
     after(async () => {
-        const sampleOne = await SampleService.findOneById(IdRecord);
-        const sampleTwo = await SampleService.findOneById(IdRecordTwo);
+        const sampleOne = await sampleService.findOneById(IdRecord);
+        const sampleTwo = await sampleService.findOneById(IdRecordTwo);
         if (sampleOne) {
-            await SampleService.remove(sampleOne);
+            await sampleService.remove(sampleOne);
         }
         if (sampleTwo) {
-            await SampleService.remove(sampleTwo);
+            await sampleService.remove(sampleTwo);
         }
     });
 
