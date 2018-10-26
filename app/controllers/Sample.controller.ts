@@ -18,13 +18,13 @@ export class SampleController extends Controller {
     }
 
     public async find(): Promise<express.Response> {
-        const id: number = this.req.params.id;
+        const { id } = this.req.params;
         const sample = await this.sampleService.findOneById(id);
         return sample ? this.res.status(200).send(sample) : this.res.status(404).send({ text: "NOT FOUND" });
     }
 
     public async create(): Promise<express.Response> {
-        const text: string = this.req.body.text;
+        const { text } = this.req.body;
         const sample = new Sample();
         sample.text = text;
         sample.email = "someone@somewhere.com";
@@ -38,9 +38,10 @@ export class SampleController extends Controller {
 
     public async update(): Promise<express.Response> {
         const sample = new Sample();
-        sample.id = this.req.body.id;
-        sample.text = this.req.body.text;
-        sample.email = this.req.body.email;
+        const { id, text, email } = this.req.body;
+        sample.id = id;
+        sample.text = text;
+        sample.email = email;
         try {
             const result = await this.sampleService.save(sample);
             return result ? this.res.status(200).send() : this.res.status(404).send({ text: "NOT FOUND" });
@@ -50,7 +51,7 @@ export class SampleController extends Controller {
     }
 
     public async delete(): Promise<express.Response> {
-        const id: number = this.req.body.id;
+        const { id } = this.req.body;
         try {
             await this.sampleService.removeById(id);
             return this.res.status(204).send();

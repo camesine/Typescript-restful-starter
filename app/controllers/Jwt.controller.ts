@@ -12,7 +12,7 @@ export class JWTController extends Controller {
     }
 
     public async index(): Promise<express.Response> {
-        const payload = this.req.body.payload;
+        const { payload } = this.req.body;
         const token = await this.jwtService.signToken(payload);
         return this.res.send(token);
     }
