@@ -1,13 +1,17 @@
-import { Request, Response, Router } from "express";
+import * as express from "express";
 import { SampleController } from "../controllers/Sample.controller";
 import { createSchema, deleteSchema, updateSchema } from "../middlewares/schemas/Sample.schemas";
 import { validator } from "../middlewares/Validator.middleware";
+import { Router } from "./Router";
 
-const Controller = new SampleController();
-
-export const SampleRoute: Router = Router()
-    .get("/", (req: Request, res: Response) => Controller.all(req, res))
-    .get("/:id", (req: Request, res: Response) => Controller.find(req, res))
-    .post("/", [ validator(createSchema) ], (req: Request, res: Response) => Controller.create(req, res))
-    .put("/", [ validator(updateSchema) ], (req: Request, res: Response) => Controller.update(req, res))
-    .delete("/", [ validator(deleteSchema) ], (req: Request, res: Response) => Controller.delete(req, res));
+export class SampleRouter extends Router {
+    constructor() {
+        super(SampleController);
+        this.router = express.Router()
+            .get("/", this.handler(SampleController.prototype.all))
+            .get("/:id", this.handler(SampleController.prototype.find))
+            .post("/", [ validator(createSchema) ], this.handler(SampleController.prototype.create))
+            .put("/", [ validator(updateSchema) ],  this.handler(SampleController.prototype.update))
+            .delete("/", [ validator(deleteSchema) ], this.handler(SampleController.prototype.delete));
+    }
+}

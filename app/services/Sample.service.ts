@@ -4,38 +4,32 @@ import { SampleRepository } from "../repository/Sample.repository";
 
 export class SampleService {
 
-    private repository: SampleRepository;
-
-    constructor() {
-        this.repository = getCustomRepository(SampleRepository);
-    }
-
     public findByText(text: string): Promise<Sample[]> {
-        return this.repository.findByText(text);
+        return getCustomRepository(SampleRepository).findByText(text);
     }
 
     public bulkCreate(Samples: Sample[]): Promise<Sample[]> {
-        return this.repository.bulkCreate(Samples);
+        return getCustomRepository(SampleRepository).bulkCreate(Samples);
     }
 
     public findOneById(id: number): Promise<Sample> {
-        return this.repository.findOneById(id);
+        return getCustomRepository(SampleRepository).findOneById(id);
     }
 
     public find(): Promise<Sample[]> {
-        return this.repository.find();
+        return getCustomRepository(SampleRepository).find();
     }
 
     public remove(sample: Sample): Promise<Sample> {
-        return this.repository.remove(sample);
+        return getCustomRepository(SampleRepository).remove(sample);
     }
 
     public removeById(id: number): Promise<Sample> {
-        return this.repository.removeById(id);
+        return getCustomRepository(SampleRepository).removeById(id);
     }
 
     public save(sample: Sample): Promise<Sample> {
-        return this.repository.save(sample);
+        return getCustomRepository(SampleRepository).save(sample);
     }
 
 }
