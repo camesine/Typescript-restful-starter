@@ -1,6 +1,6 @@
 import * as express from "express";
 import * as jwt from "express-jwt";
-import { JWTRoute } from "../app/routes/Jwt.route";
+import { JWTRouter } from "../app/routes/Jwt.route";
 import { SampleRouter } from "../app/routes/Sample.route";
 import { config } from "../config";
 
@@ -11,9 +11,10 @@ interface IROUTER {
 }
 
 const Sample = new SampleRouter();
+const JWT = new JWTRouter();
 
 export const ROUTER: IROUTER[] = [{
-    handler: JWTRoute,
+    handler: JWT.router,
     middleware: [],
     path: "/JWT",
 }, {

@@ -1,5 +1,11 @@
 import * as express from "express";
 import { JWTController } from "../controllers/Jwt.controller";
+import { Router } from "./Router";
 
-export const JWTRoute: express.Router = express.Router()
-    .post("/", JWTController.index);
+export class JWTRouter extends Router {
+    constructor() {
+        super(JWTController);
+        this.router = express.Router()
+            .post("/", this.handler(JWTController.prototype.index));
+    }
+}

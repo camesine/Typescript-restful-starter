@@ -20,4 +20,5 @@ export class SampleRepository extends Repository<Sample> {
     public findOneById(id: number): Promise<Sample> {
         return this.manager.findOne(Sample, {where: {id}});
     }
+
 }

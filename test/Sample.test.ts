@@ -23,7 +23,7 @@ describe("Sample route", () => {
         server.Start().then(() => {
             app = server.App();
             Promise.all([
-                JWTService.signToken({name: "name", role: "rol"}),
+                new JWTService().signToken({name: "name", role: "rol"}),
                 sampleService.save(sample),
             ]).then((res) => {
                 token = res[0];
