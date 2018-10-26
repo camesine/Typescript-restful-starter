@@ -3,6 +3,7 @@ import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("sample")
 export class Sample extends BaseEntity {
+
     @PrimaryGeneratedColumn()
     public id: number;
 
@@ -12,4 +13,5 @@ export class Sample extends BaseEntity {
     @Column("text")
     @IsEmail()
     public email: string;
+
 }
