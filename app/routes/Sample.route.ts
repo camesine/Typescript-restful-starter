@@ -1,7 +1,7 @@
 import * as express from "express";
 import { SampleController } from "../controllers/Sample.controller";
-import { createSchema, deleteSchema, updateSchema } from "../middlewares/schemas/Sample.schemas";
 import { validator } from "../middlewares/Validator.middleware";
+import { createSchema, deleteSchema, updateSchema } from "../schemas/Sample.schemas";
 import { Router } from "./Router";
 
 export class SampleRouter extends Router {
