@@ -1,7 +1,7 @@
+import { Controller } from "camesine";
 import * as express from "express";
 import { Sample } from "../models/Sample.model";
 import { SampleService } from "../services/Sample.service";
-import { Controller } from "./Controller";
 
 export class SampleController extends Controller {
 
