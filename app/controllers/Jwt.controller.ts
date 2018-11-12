@@ -1,6 +1,6 @@
+import { Controller } from "camesine";
 import * as express from "express";
 import { JWTService } from "../services/Jwt.service";
-import { Controller } from "./Controller";
 
 export class JWTController extends Controller {
 
