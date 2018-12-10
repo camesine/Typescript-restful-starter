@@ -1,10 +1,14 @@
 import * as chai from "chai";
 import * as express from "express";
+import * as path from "path";
 import * as supertest from "supertest";
-import { Sample } from "../app/models/Sample.model";
-import { JWTService } from "../app/services/Jwt.service";
+import { Sample } from "../app/models";
+import { JwtService } from "../app/services/Jwt.service";
 import { SampleService } from "../app/services/Sample.service";
 import { Server } from "../config/Server";
+
+// tslint:disable-next-line:no-var-requires
+require("dotenv").config({ path: `${path.resolve()}/.env` });
 
 let token: string;
 let IdRecord: number;
@@ -23,7 +27,7 @@ describe("Sample route", () => {
         server.Start().then(() => {
             app = server.App();
             Promise.all([
-                new JWTService().signToken({name: "name", role: "rol"}),
+                new JwtService().signToken({name: "name", role: "rol"}),
                 sampleService.save(sample),
             ]).then((res) => {
                 token = res[0];

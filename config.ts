@@ -18,8 +18,12 @@ const PRODUCTION_CONFIGURATION = {
     USER_DB: env.USER_DB,
 };
 
+export function isProduction(): boolean {
+    return env.NODE_ENV === "PRODUCTION";
+}
+
 export const config = {
-    DATABASE: env.NODE_ENV === "PRODUCTION" ? PRODUCTION_CONFIGURATION : LOCAL_CONFIGURATION,
-    PORT_APP: 80,
-    SECRET: "HltH3R3",
+    DATABASE: isProduction() ? PRODUCTION_CONFIGURATION : LOCAL_CONFIGURATION,
+    PORT_APP: 8080,
+    SECRET: env.SECRET,
 };

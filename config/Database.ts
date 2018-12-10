@@ -1,5 +1,5 @@
 import { createConnection } from "typeorm";
-import { Sample } from "../app/models/Sample.model";
+import { Sample } from "../app/models";
 import { config, DIALECT } from "../config";
 
 export const Connection = createConnection({

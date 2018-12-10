@@ -1,16 +1,15 @@
 import { Router, validator } from "camesine";
-import * as express from "express";
-import { SampleController } from "../controllers/Sample.controller";
-import { createSchema, deleteSchema, updateSchema } from "../schemas/Sample.schemas";
+import { SampleController } from "../controllers";
+import { createSample, deleteSample, updateSample } from "../schemas";
 
 export class SampleRouter extends Router {
     constructor() {
         super(SampleController);
-        this.router = express.Router()
+        this.router
             .get("/", this.handler(SampleController.prototype.all))
             .get("/:id", this.handler(SampleController.prototype.find))
-            .post("/", [ validator(createSchema) ], this.handler(SampleController.prototype.create))
-            .put("/", [ validator(updateSchema) ],  this.handler(SampleController.prototype.update))
-            .delete("/", [ validator(deleteSchema) ], this.handler(SampleController.prototype.delete));
+            .post("/", [ validator(createSample) ], this.handler(SampleController.prototype.create))
+            .put("/", [ validator(updateSample) ],  this.handler(SampleController.prototype.update))
+            .delete("/", [ validator(deleteSample) ], this.handler(SampleController.prototype.delete));
     }
 }

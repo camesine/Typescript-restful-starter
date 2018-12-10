@@ -1,11 +1,10 @@
 import { Router } from "camesine";
-import * as express from "express";
-import { JWTController } from "../controllers/Jwt.controller";
+import { JWTController } from "../controllers";
 
-export class JWTRouter extends Router {
+export class JwtRouter extends Router {
     constructor() {
         super(JWTController);
-        this.router = express.Router()
+        this.router
             .post("/", this.handler(JWTController.prototype.index));
     }
 }

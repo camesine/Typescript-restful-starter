@@ -1,14 +1,14 @@
 import { number, object, string } from "joi";
 
-export const createSchema = object().keys({
+export const createSample = object().keys({
     text: string().required(),
 });
 
-export const updateSchema = object().keys({
+export const updateSample = object().keys({
     id: number().required(),
     text: string().required(),
 });
 
-export const deleteSchema = object().keys({
+export const deleteSample = object().keys({
     id: number().required(),
 });

@@ -4,10 +4,10 @@
   "description": "kit starter node application",
   "main": "server.js",
   "scripts": {
-    "start": "npm run build && cd dist && cross-env NODE_ENV=PRODUCTION node Index.js",
+    "start": "npm run build && cd dist && cross-env NODE_ENV=PRODUCTION node -r dotenv/config Index.js dotenv_config_path=$(pwd)/.env",
     "dev": "nodemon",
     "test": "cross-env NODE_ENV=test mocha test/**/*.ts",
-    "build": "npm run clean && tsc --outDir dist",
+    "build": "npm run clean && tsc --outDir dist && cp .env ./dist",
     "clean": "rimraf dist"
   },
   "keywords": [
@@ -22,6 +22,7 @@
   "author": "Hector Riquelme",
   "license": "MIT",
   "dependencies": {
+    "@types/dotenv": "^6.1.0",
     "@types/express": "^4.11.1",
     "@types/joi": "^13.6.1",
     "@types/jsonwebtoken": "^7.2.6",
@@ -32,6 +33,7 @@
     "class-validator": "^0.9.1",
     "cluster": "^0.7.7",
     "cors": "^2.8.4",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-jwt": "^5.3.1",
     "joi": "^14.0.0",

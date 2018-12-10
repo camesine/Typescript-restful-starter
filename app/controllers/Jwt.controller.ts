@@ -1,17 +1,17 @@
 import { Controller } from "camesine";
-import * as express from "express";
-import { JWTService } from "../services/Jwt.service";
+import { Request, Response } from "express";
+import { JwtService } from "../services";
 
 export class JWTController extends Controller {
 
-    private jwtService: JWTService;
+    private jwtService: JwtService;
 
-    constructor(req: express.Request, res: express.Response) {
+    constructor(req: Request, res: Response) {
         super(req, res);
-        this.jwtService = new JWTService();
+        this.jwtService = new JwtService();
     }
 
-    public async index(): Promise<express.Response> {
+    public async index(): Promise<Response> {
         const { payload } = this.req.body;
         const token = await this.jwtService.signToken(payload);
         return this.res.send(token);
