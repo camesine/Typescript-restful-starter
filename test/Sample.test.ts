@@ -1,14 +1,14 @@
 import * as chai from "chai";
+import * as dotenv from "dotenv";
 import * as express from "express";
-import * as path from "path";
+import { resolve } from "path";
 import * as supertest from "supertest";
 import { Sample } from "../app/models";
 import { JwtService } from "../app/services/Jwt.service";
 import { SampleService } from "../app/services/Sample.service";
 import { Server } from "../config/Server";
 
-// tslint:disable-next-line:no-var-requires
-require("dotenv").config({ path: `${path.resolve()}/.env` });
+dotenv.config({ path: resolve() + "/.env" });
 
 let token: string;
 let IdRecord: number;

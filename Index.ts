@@ -1,8 +1,12 @@
 import * as cluster from "cluster";
+import * as dotenv from "dotenv";
 import { cpus } from "os";
+import { resolve } from "path";
 import { env } from "process";
 import { config, isProduction } from "./config";
 import { Server } from "./config/Server";
+
+dotenv.config({ path: resolve() + "/.env" });
 
 if (cluster.isMaster) {
     console.log(`\n -------------------> RUN ${env.NODE_ENV} ENVIRONMENT \n`);

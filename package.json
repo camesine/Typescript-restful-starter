@@ -4,7 +4,7 @@
   "description": "kit starter node application",
   "main": "server.js",
   "scripts": {
-    "start": "npm run build && cd dist && cross-env NODE_ENV=PRODUCTION node -r dotenv/config Index.js dotenv_config_path=$(pwd)/.env",
+    "start": "npm run build && cd dist && cross-env NODE_ENV=PRODUCTION node -r dotenv/config Index.js",
     "dev": "nodemon",
     "test": "cross-env NODE_ENV=test mocha test/**/*.ts",
     "build": "npm run clean && tsc --outDir dist && cp .env ./dist",
