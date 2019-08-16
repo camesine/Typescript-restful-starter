@@ -29,10 +29,15 @@ Index.ts (Main file to start the app)
 ```
 # Install
 1. First clone this repository.
+		
 		git@github.com:camesine/Typescript-restful-starter.git
+		
 2. Download all dependencies.
+
 		npm install
-3. Edit the file ./config.ts with your own settings:
+		
+3. Edit the file `./config.ts` with your own settings:
+
 ```js
 
 
