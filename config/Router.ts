@@ -19,7 +19,7 @@ export const ROUTER: IROUTER[] = [{
 }, {
     handler: Sample.router,
     middleware: [
-        jwt({secret: config.SECRET}),
+        jwt({ secret: config.SECRET }),
     ],
     path: "/sample",
 }, {

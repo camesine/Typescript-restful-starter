@@ -8,7 +8,8 @@ import { Connection } from "./Database";
 import { ROUTER } from "./Router";
 
 export class Server {
-    private static ConnectDB(): Promise<any> {
+
+    private static connectDB(): Promise<any> {
         return Connection;
     }
 
@@ -20,19 +21,18 @@ export class Server {
         this.server = http.createServer(this.app);
     }
 
-    public Start(): Promise<http.Server> {
-        return Server.ConnectDB().then(() => {
-            this.ExpressConfiguration();
-            this.ConfigurationRouter();
-            return this.server;
-        });
+    public async start(): Promise<http.Server> {
+        await Server.connectDB();
+        this.expressConfiguration();
+        this.configurationRouter();
+        return this.server;
     }
 
     public App(): express.Application {
         return this.app;
     }
 
-    private ExpressConfiguration(): void {
+    private expressConfiguration(): void {
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(bodyParser.json({ limit: "50mb" }));
         this.app.use(methodOverride());
@@ -50,7 +50,7 @@ export class Server {
         });
     }
 
-    private ConfigurationRouter(): void {
+    private configurationRouter(): void {
         for (const route of ROUTER) {
             this.app.use(route.path, route.middleware, route.handler);
         }

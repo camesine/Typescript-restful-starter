@@ -1,6 +1,7 @@
-import { Router, validator } from "camesine";
 import { SampleController } from "../controllers";
+import { Validator } from "../middlewares";
 import { createSample, deleteSample, updateSample } from "../schemas";
+import { Router } from "./Router";
 
 export class SampleRouter extends Router {
     constructor() {
@@ -8,8 +9,8 @@ export class SampleRouter extends Router {
         this.router
             .get("/", this.handler(SampleController.prototype.all))
             .get("/:id", this.handler(SampleController.prototype.find))
-            .post("/", [ validator(createSample) ], this.handler(SampleController.prototype.create))
-            .put("/", [ validator(updateSample) ],  this.handler(SampleController.prototype.update))
-            .delete("/", [ validator(deleteSample) ], this.handler(SampleController.prototype.delete));
+            .post("/", [ Validator(createSample) ], this.handler(SampleController.prototype.create))
+            .put("/", [ Validator(updateSample) ],  this.handler(SampleController.prototype.update))
+            .delete("/", [ Validator(deleteSample) ], this.handler(SampleController.prototype.delete));
     }
 }
