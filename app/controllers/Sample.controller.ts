@@ -1,7 +1,7 @@
-import { Controller } from "camesine";
 import { Request, Response } from "express";
 import { Sample } from "../models";
 import { SampleService } from "../services";
+import { Controller } from "./Controller";
 
 export class SampleController extends Controller {
 
@@ -20,9 +20,13 @@ export class SampleController extends Controller {
     }
 
     public async find(): Promise<Response> {
-        const { id } = this.req.params as { id: number };
+        const { id } = this.req.params as unknown as { id: number };
         const sample = await this.sampleService.findOneById(id);
-        return sample ? this.res.status(200).send(sample) : this.res.status(404).send({ text: "NOT FOUND" });
+        if (sample) {
+            return this.res.status(200).send(sample);
+        } else {
+            return this.res.status(404).send({ text: "not found" });
+        }
     }
 
     public async create(): Promise<Response> {
@@ -43,10 +47,14 @@ export class SampleController extends Controller {
         this.sample.text = text;
         this.sample.email = email;
         try {
-            const result = await this.sampleService.save(this.sample);
-            return result ? this.res.status(200).send() : this.res.status(404).send({ text: "NOT FOUND" });
+            const sample = await this.sampleService.save(this.sample);
+            if (sample) {
+                return this.res.status(200).send();
+            } else {
+                return this.res.status(404).send({ text: "not found" });
+            }
         } catch (ex) {
-            return this.res.status(404).send({ text: "ERROR" });
+            return this.res.status(404).send({ text: "error" });
         }
     }
 

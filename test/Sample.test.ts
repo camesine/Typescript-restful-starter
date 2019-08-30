@@ -24,10 +24,10 @@ describe("Sample route", () => {
         const sample = new Sample();
         sample.text = "SAMPLE TEXT";
         sample.email = "someone@somewhere.com";
-        server.Start().then(() => {
+        server.start().then(() => {
             app = server.App();
             Promise.all([
-                new JwtService().signToken({name: "name", role: "rol"}),
+                new JwtService().signToken({ name: "name", role: "rol" }),
                 sampleService.save(sample),
             ]).then((res) => {
                 token = res[0];
@@ -126,7 +126,7 @@ describe("Sample route", () => {
                 chai.expect(res.status).to.eq(404);
                 chai.expect(res.body).to.have.all.keys("text");
                 chai.expect(res.body.text).to.be.a("string");
-                chai.expect(res.body.text).to.equal("NOT FOUND");
+                chai.expect(res.body.text).to.equal("not found");
                 done();
             });
     });

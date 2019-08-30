@@ -1,5 +1,5 @@
-import { Router } from "camesine";
 import { JWTController } from "../controllers";
+import { Router } from "./Router";
 
 export class JwtRouter extends Router {
     constructor() {
