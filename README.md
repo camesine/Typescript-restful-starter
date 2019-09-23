@@ -69,7 +69,7 @@ export const config = {
 ```
 # Start App
 When execute any of this commands the app start with clustering, creating many cluster apps depending of the numbers of CPU's your computer had.
-### Development: In Development mode the express app is starter with nodemon for automatic refresh when do changes.
+### Development: In Development mode, the express app is started with nodemon for automatic refresh when changes are made.
 	npm run dev
 ### Test: Run test in development environment
 	npm test
