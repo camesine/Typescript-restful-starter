@@ -1,4 +1,4 @@
-import { number, object, string } from "joi";
+import { number, object, string } from "@hapi/joi";
 
 export const createSample = object().keys({
     text: string().required(),

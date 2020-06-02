@@ -1,6 +1,6 @@
 import { createConnection } from "typeorm";
 import { Sample } from "../app/models";
-import { config, DIALECT } from "../config";
+import { config } from "../config";
 
 export const Connection = createConnection({
     database: config.DATABASE.DB,
@@ -12,6 +12,6 @@ export const Connection = createConnection({
     password: config.DATABASE.PASSWORD,
     port: config.DATABASE.PORT_DB,
     synchronize: true,
-    type: DIALECT,
+    type: config.DATABASE.DIALECT as any,
     username: config.DATABASE.USER_DB,
 });

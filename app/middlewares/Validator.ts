@@ -1,9 +1,9 @@
+import { ObjectSchema, ValidationOptions } from "@hapi/joi";
 import * as express from "express";
-import { ObjectSchema, ValidationOptions } from "joi";
 
 const OPTS: ValidationOptions = {
     abortEarly: false,
-    language: {
+    messages: {
         key: "{{key}} ",
     },
 };
