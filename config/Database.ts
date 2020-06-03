@@ -1,17 +1,14 @@
 import { createConnection } from "typeorm";
-import { Sample } from "../app/models";
-import { config } from "../config";
+import { environment } from "../env";
 
 export const Connection = createConnection({
-    database: config.DATABASE.DB,
-    entities: [
-        Sample,
-    ],
-    host: config.DATABASE.SERVER,
+    database: environment.db.database,
+    entities: environment.app.dirs.entities,
+    host: environment.app.host,
     logging: false,
-    password: config.DATABASE.PASSWORD,
-    port: config.DATABASE.PORT_DB,
-    synchronize: true,
-    type: config.DATABASE.DIALECT as any,
-    username: config.DATABASE.USER_DB,
+    password: environment.db.password,
+    port: environment.db.port,
+    synchronize: environment.db.synchronize,
+    type: environment.db.type as any,
+    username: environment.db.username,
 });

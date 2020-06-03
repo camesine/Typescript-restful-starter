@@ -8,6 +8,7 @@
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "baseUrl": ".",
+    "resolveJsonModule": true,
     "paths": {
       "*": [
         "node_modules/*",

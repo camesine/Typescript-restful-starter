@@ -1,4 +1,37 @@
-node_modules
+# Logs #
+/logs
 *.log
-dist
-package-lock.json
+*.log*
+
+# Node files #
+node_modules/
+npm-debug.log
+yarn-error.log
+.env
+
+# Typing #
+typings/
+
+# Dist #
+dist/
+tsconfig.build.json
+
+# IDE #
+.idea/
+*.swp
+.awcache
+
+# Generated source-code #
+src/**/*.js
+src/**/*.js.map
+!src/public/**/*
+test/**/*.js
+test/**/*.js.map
+coverage/
+!test/preprocessor.js
+mydb.sql
+
+# OS generated files #
+.DS_Store
+/**/.DS_Store
+Thumbs.db

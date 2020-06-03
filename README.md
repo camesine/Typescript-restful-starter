@@ -39,39 +39,36 @@ Index.ts (Main file to start the app)
 3. Edit the file `./env` and add config database like:
 
 ```js
-DB=test
-PASSWORD=root
-PORT_DB=3306
-SERVER=127.0.0.1
-USER_DB=root
-```
+#
+# APPLICATION
+#
+APP_NAME=restful-starter-server
+APP_SCHEMA=http
+APP_HOST=localhost
+APP_PORT=3000
 
-4. Edit the file `./config.ts` with your own settings:
+APP_SECRET=HltH3R3
 
-```js
-const LOCAL_CONFIGURATION = {
-    DB: "test",
-    DIALECT: "mysql",
-    PASSWORD: "",
-    PORT_DB: 3306,
-    SERVER: "127.0.0.1",
-    USER_DB: "root",
-};
 
-const PRODUCTION_CONFIGURATION = {
-    DB: process.env.DB || "prod",
-    DIALECT: process.env.DIALECT || "mysql",
-    PASSWORD: process.env.PASSWORD || "",
-    PORT_DB: Number(process.env.PORT_DB) || 3306,
-    SERVER: process.env.SERVER || "localhost",
-    USER_DB: process.env.USER_DB || "root",
-};
+#
+# MySQL DATABASE
+#
+# mysql or mariadb
+TYPEORM_CONNECTION=mariadb
+TYPEORM_HOST=localhost
+TYPEORM_PORT=3306
+TYPEORM_USERNAME=root
+TYPEORM_PASSWORD=root
+TYPEORM_DATABASE=test
+TYPEORM_SYNCHRONIZE=true
+TYPEORM_LOGGING=error
+TYPEORM_LOGGER=advanced-console
 
-export const config = {
-    SECRET: "HltH3R3",
-    PORT_APP: 1344,
-    DATABASE: process.env.NODE_ENV === 'PRODUCTION' ? PRODUCTION_CONFIGURATION : LOCAL_CONFIGURATION
-}
+#
+# PATH STRUCTRUE
+#
+TYPEORM_ENTITIES=app/models/**/*.ts
+TYPEORM_ENTITIES_DIR=app/models
 ```
 
 # Start App
