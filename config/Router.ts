@@ -1,7 +1,7 @@
 import * as express from "express";
 import * as jwt from "express-jwt";
 import { JwtRouter, SampleRouter } from "../app/routes";
-import { config } from "../config";
+import { environment } from "../env";
 
 interface IROUTER {
     path: string;
@@ -19,7 +19,7 @@ export const ROUTER: IROUTER[] = [{
 }, {
     handler: Sample.router,
     middleware: [
-        jwt({ secret: config.SECRET }),
+        jwt({ secret: environment.app.secret }),
     ],
     path: "/sample",
 }, {
