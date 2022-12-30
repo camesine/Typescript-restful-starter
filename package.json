@@ -66,7 +66,7 @@
     "@types/supertest": "^2.0.9",
     "chai": "^4.2.0",
     "cross-env": "^7.0.2",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "nodemon": "^2.0.4",
     "rimraf": "^3.0.2",
     "supertest": "^4.0.2",
